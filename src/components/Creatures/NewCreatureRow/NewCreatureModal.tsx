@@ -5,8 +5,8 @@ import {
   Stack,
   TextField,
   Typography,
-} from "@mui/material";
-import { useCreatureContext } from "../../../utils/creature-context";
+} from '@mui/material';
+import { useCreatureContext } from '../../../utils/creature-context';
 
 interface INewCreatureModalProps {
   onAdd: () => void;
@@ -29,18 +29,13 @@ export const NewCreatureModal = ({
         borderRadius={2}
         sx={{
           bgcolor: ({ palette }) => palette.background.default,
-          position: "absolute",
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
+          position: 'absolute',
+          left: '50%',
+          top: '50%',
+          transform: 'translate(-50%, -50%)',
         }}
       >
-        <Typography
-          textAlign="center"
-          variant="h6"
-          mb={2}
-          color='white'
-        >
+        <Typography textAlign="center" variant="h6" mb={2} color="white">
           Enter New Creature Details
         </Typography>
 
@@ -66,7 +61,7 @@ export const NewCreatureModal = ({
               onChange={({ target }) =>
                 setCreature({ ...creature, hp: target.value })
               }
-              value={creature?.hp ?? ""}
+              value={creature?.hp ?? ''}
               variant="outlined"
               placeholder="HP"
             />

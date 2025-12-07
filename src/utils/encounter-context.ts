@@ -1,5 +1,5 @@
-import type { IEncounter } from "../api/encounters";
-import { createContextUtil } from "./context";
+import type { IEncounter } from '../api/encounters';
+import { createContextUtil } from './context';
 
 type EncounterContextProps = {
   encounters: IEncounter[];

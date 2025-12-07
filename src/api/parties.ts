@@ -9,7 +9,7 @@ export interface IParty {
   heroes: IHero[];
 }
 
-const PARTIES_KEY = "parties";
+const PARTIES_KEY = 'parties';
 
 export const getParties = (): IParty[] => {
   const localEncounters = localStorage.getItem(PARTIES_KEY);

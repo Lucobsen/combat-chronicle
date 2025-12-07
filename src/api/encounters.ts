@@ -19,7 +19,7 @@ export interface IEncounter {
   inProgress: boolean;
 }
 
-const ENCOUNTERS_KEY = "encounters";
+const ENCOUNTERS_KEY = 'encounters';
 
 export const getEncounters = (): IEncounter[] => {
   const localEncounters = localStorage.getItem(ENCOUNTERS_KEY);
@@ -40,7 +40,7 @@ export const getEncounters = (): IEncounter[] => {
     inProgress:
       encounter.inProgress !== undefined
         ? encounter.inProgress
-        : encounter.round > 1 || encounter.activeCreatureId !== "",
+        : encounter.round > 1 || encounter.activeCreatureId !== '',
   }));
 };
 

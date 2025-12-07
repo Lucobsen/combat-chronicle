@@ -1,5 +1,5 @@
-import { IconButton } from "@mui/material";
-import type { JSX } from "react";
+import { IconButton } from '@mui/material';
+import type { JSX } from 'react';
 
 interface IConditionIconProps {
   icon: JSX.Element;

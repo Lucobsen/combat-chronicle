@@ -1,4 +1,4 @@
-import AddIcon from "@mui/icons-material/Add";
+import AddIcon from '@mui/icons-material/Add';
 import {
   Checkbox,
   FormControlLabel,
@@ -6,10 +6,10 @@ import {
   MenuItem,
   Stack,
   TextField,
-} from "@mui/material";
-import { useState } from "react";
-import { quantities } from "../../../models/models";
-import { useCreatureContext } from "../../../utils/creature-context";
+} from '@mui/material';
+import { useState } from 'react';
+import { quantities } from '../../../models/models';
+import { useCreatureContext } from '../../../utils/creature-context';
 
 interface IInitialStateProps {
   onSingleAdd: () => void;
@@ -30,7 +30,7 @@ export const InitialState = ({
           size="small"
           type="number"
           label="Init"
-          sx={{ width: "40%" }}
+          sx={{ width: '40%' }}
           onChange={({ target }) =>
             setCreature({ ...creature, initative: target.value })
           }
@@ -58,11 +58,11 @@ export const InitialState = ({
           size="small"
           type="number"
           label="HP"
-          sx={{ width: "40%" }}
+          sx={{ width: '40%' }}
           onChange={({ target }) =>
             setCreature({ ...creature, hp: target.value })
           }
-          value={creature.hp ?? ""}
+          value={creature.hp ?? ''}
           variant="outlined"
           placeholder="HP"
         />
@@ -89,7 +89,7 @@ export const InitialState = ({
           size="small"
           type="number"
           value={creatureQuantity}
-          sx={{ width: "20%" }}
+          sx={{ width: '20%' }}
           label="Quantity"
           onChange={({ target }) =>
             setCreatureQuantity(Number.parseInt(target.value))

@@ -1,10 +1,10 @@
-import { Button, Container, Stack } from "@mui/material";
-import { useState } from "react";
-import type { IHero } from "../../../api/parties";
-import { usePartyContext } from "../../../utils/party-context";
-import { NamingModal } from "../../shared/Modals/NamingModal";
-import { PartyItem } from "../PartyItem/PartyItem";
-import { EmptyState } from "./EmptyState";
+import { Button, Container, Stack } from '@mui/material';
+import { useState } from 'react';
+import type { IHero } from '../../../api/parties';
+import { usePartyContext } from '../../../utils/party-context';
+import { NamingModal } from '../../shared/Modals/NamingModal';
+import { PartyItem } from '../PartyItem/PartyItem';
+import { EmptyState } from './EmptyState';
 
 export const PartyList = () => {
   const { partyList, updatePartyList } = usePartyContext();
@@ -94,12 +94,12 @@ export const PartyList = () => {
               variant="contained"
               color="success"
               sx={{
-                fontWeight: "bold",
-                position: "fixed",
-                bottom: "5%",
-                left: "50%",
-                width: "60%",
-                transform: "translate(-50%, -50%)",
+                fontWeight: 'bold',
+                position: 'fixed',
+                bottom: '5%',
+                left: '50%',
+                width: '60%',
+                transform: 'translate(-50%, -50%)',
               }}
               onClick={() => setIsAddModalOpen(true)}
             >

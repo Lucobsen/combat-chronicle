@@ -1,9 +1,9 @@
-import { AppBar, Toolbar } from "@mui/material";
-import type { ICreature } from "../../../api/encounters";
-import { letterMapping } from "../../../models/models";
-import { useCreatureContext } from "../../../utils/creature-context";
-import { ActiveState } from "./ActiveState";
-import { InitialState } from "./InitialState";
+import { AppBar, Toolbar } from '@mui/material';
+import type { ICreature } from '../../../api/encounters';
+import { letterMapping } from '../../../models/models';
+import { useCreatureContext } from '../../../utils/creature-context';
+import { ActiveState } from './ActiveState';
+import { InitialState } from './InitialState';
 
 interface INewCreatureRowProps {
   onAddSingleCreature: (newCreature: ICreature) => void;
@@ -41,13 +41,14 @@ export const NewCreatureRow = ({
     <AppBar
       position="fixed"
       sx={{
-        top: "auto",
-        boxShadow: "none",
+        top: 'auto',
+        boxShadow: 'none',
         bottom: 0,
         borderTop: ({ palette }) =>
-          `1px solid ${palette.mode === "light"
-            ? palette.common.black
-            : palette.common.white
+          `1px solid ${
+            palette.mode === 'light'
+              ? palette.common.black
+              : palette.common.white
           }`,
       }}
     >
@@ -55,7 +56,7 @@ export const NewCreatureRow = ({
         sx={{
           p: ({ spacing }) => spacing(1.5, 1),
           backgroundColor: ({ palette }) =>
-            palette.mode === "light" ? palette.common.white : "#121212",
+            palette.mode === 'light' ? palette.common.white : '#121212',
         }}
       >
         {inProgress ? (

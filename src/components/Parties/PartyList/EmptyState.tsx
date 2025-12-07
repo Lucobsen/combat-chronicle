@@ -1,4 +1,4 @@
-import { Button, Stack, Typography } from "@mui/material";
+import { Button, Stack, Typography } from '@mui/material';
 
 interface IEmptyStateProps {
   openModal: () => void;
@@ -13,21 +13,21 @@ export const EmptyState = ({ openModal }: IEmptyStateProps) => (
     width="60%"
     spacing={2}
     sx={{
-      transform: "translate(-50%, -50%)",
+      transform: 'translate(-50%, -50%)',
     }}
   >
     <Typography
       variant="h6"
       alignSelf="center"
       textAlign="center"
-      color='white'
+      color="white"
     >
       Nat 1, no parties found!
     </Typography>
     <Button
       variant="contained"
       color="success"
-      sx={{ fontWeight: "bold" }}
+      sx={{ fontWeight: 'bold' }}
       onClick={openModal}
     >
       Add party

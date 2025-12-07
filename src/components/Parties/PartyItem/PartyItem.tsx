@@ -1,6 +1,6 @@
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import {
   Box,
   Collapse,
@@ -9,11 +9,11 @@ import {
   Stack,
   TextField,
   useTheme,
-} from "@mui/material";
-import { useState } from "react";
-import type { IHero } from "../../../api/parties";
-import { HeroItem } from "../HeroItem/HeroItem";
-import { NewHeroItem } from "../NewHeroItem/NewHeroItem";
+} from '@mui/material';
+import { useState } from 'react';
+import type { IHero } from '../../../api/parties';
+import { HeroItem } from '../HeroItem/HeroItem';
+import { NewHeroItem } from '../NewHeroItem/NewHeroItem';
 
 interface IPartyItem {
   name: string;
@@ -40,8 +40,9 @@ export const PartyItem = ({
   return (
     <Box
       width="100%"
-      border={`1px solid ${palette.mode === "light" ? palette.common.black : palette.common.white
-        }`}
+      border={`1px solid ${
+        palette.mode === 'light' ? palette.common.black : palette.common.white
+      }`}
       bgcolor={palette.background.default}
       borderRadius={2}
       p={1}
@@ -52,7 +53,7 @@ export const PartyItem = ({
           onClick={() => setIsHeroListOpen(!isHeroListOpen)}
           sx={{
             color:
-              palette.mode === "light"
+              palette.mode === 'light'
                 ? palette.common.black
                 : palette.common.white,
           }}

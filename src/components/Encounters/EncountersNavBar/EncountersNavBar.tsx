@@ -1,4 +1,4 @@
-import Groups3Icon from "@mui/icons-material/Groups3";
+import Groups3Icon from '@mui/icons-material/Groups3';
 import {
   AppBar,
   Box,
@@ -8,7 +8,7 @@ import {
   Toolbar,
   Typography,
   useTheme,
-} from "@mui/material";
+} from '@mui/material';
 
 export const EncountersNavBar = () => {
   const { palette } = useTheme();
@@ -18,14 +18,14 @@ export const EncountersNavBar = () => {
       <AppBar
         position="fixed"
         sx={{
-          boxShadow: "none",
+          boxShadow: 'none',
           color: '#fff',
           borderBottom: '1px solid #fff',
         }}
       >
         <Toolbar
           sx={{
-            justifyContent: "space-between",
+            justifyContent: 'space-between',
             backgroundColor: palette.common.black,
           }}
         >
@@ -39,7 +39,7 @@ export const EncountersNavBar = () => {
               Combat Chronicle
             </Typography>
             <Chip
-              variant={palette.mode === "dark" ? "outlined" : "filled"}
+              variant={palette.mode === 'dark' ? 'outlined' : 'filled'}
               size="small"
               label="BETA"
               color="success"
@@ -47,11 +47,10 @@ export const EncountersNavBar = () => {
             />
           </Stack>
 
-          <IconButton  >
+          <IconButton>
             <Groups3Icon
               sx={{
-                color:
-                  palette.common.white
+                color: palette.common.white,
               }}
             />
           </IconButton>

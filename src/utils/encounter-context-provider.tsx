@@ -1,13 +1,16 @@
-import { isBefore } from "date-fns";
-import { type ReactNode, useCallback, useMemo, useState } from "react";
-import { getEncounters, type IEncounter, setEncounters } from "../api/encounters";
-import { ProviderEncounterContext } from "./encounter-context";
+import { isBefore } from 'date-fns';
+import { type ReactNode, useCallback, useMemo, useState } from 'react';
+import {
+  getEncounters,
+  type IEncounter,
+  setEncounters,
+} from '../api/encounters';
+import { ProviderEncounterContext } from './encounter-context';
 
 const sortEncounters = (encounters: IEncounter[]) =>
   encounters.sort((encounterA, encounterB) =>
     isBefore(encounterA.lastUpdatedOn, encounterB.lastUpdatedOn) ? 1 : -1
   );
-
 
 type EncounterContextProviderProps = {
   children: ReactNode;
@@ -16,9 +19,8 @@ type EncounterContextProviderProps = {
 export const EncounterContextProvider = ({
   children,
 }: EncounterContextProviderProps) => {
-  const [encounters, setEncounterList] = useState<IEncounter[]>(
-    getEncounters()
-  );
+  const [encounters, setEncounterList] =
+    useState<IEncounter[]>(getEncounters());
 
   const updateEncounters = useCallback((updatedList: IEncounter[]) => {
     const sortedList = sortEncounters(updatedList);

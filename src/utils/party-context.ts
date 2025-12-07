@@ -1,5 +1,5 @@
-import type { IParty } from "../api/parties";
-import { createContextUtil } from "./context";
+import type { IParty } from '../api/parties';
+import { createContextUtil } from './context';
 
 type PartyContextProps = {
   partyList: IParty[];

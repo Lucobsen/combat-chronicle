@@ -1,6 +1,6 @@
-import type { Dispatch } from "react";
-import type { ICreature } from "../api/encounters";
-import { createContextUtil } from "./context";
+import type { Dispatch } from 'react';
+import type { ICreature } from '../api/encounters';
+import { createContextUtil } from './context';
 
 type CreatureContextProps = {
   creature: ICreature;
