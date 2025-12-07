@@ -1,12 +1,8 @@
-import DesktopAccessDisabledIcon from "@mui/icons-material/DesktopAccessDisabled";
-import { Box, Stack, Typography, useTheme } from "@mui/material";
+import DesktopAccessDisabledIcon from '@mui/icons-material/DesktopAccessDisabled';
+import { Box, Stack, Typography, useTheme } from '@mui/material';
 
 const TextItem = ({ label }: { label: string }) => (
-  <Typography
-    textAlign="center"
-    variant="h5"
-    color='white'
-  >
+  <Typography textAlign="center" variant="h5" color="white">
     {label}
   </Typography>
 );
@@ -21,7 +17,7 @@ export const DesktopWarning = () => {
       position="absolute"
       top="40%"
       left="50%"
-      sx={{ transform: "translate(-50%, -50%)" }}
+      sx={{ transform: 'translate(-50%, -50%)' }}
     >
       <DesktopAccessDisabledIcon
         sx={{

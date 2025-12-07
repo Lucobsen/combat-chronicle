@@ -1,4 +1,4 @@
-import HomeIcon from "@mui/icons-material/Home";
+import HomeIcon from '@mui/icons-material/Home';
 import {
   AppBar,
   Box,
@@ -6,8 +6,8 @@ import {
   Toolbar,
   Typography,
   useTheme,
-} from "@mui/material";
-import { useNavigate } from "@tanstack/react-router";
+} from '@mui/material';
+import { useNavigate } from '@tanstack/react-router';
 
 export const PartyNavBar = () => {
   const { palette } = useTheme();
@@ -18,14 +18,14 @@ export const PartyNavBar = () => {
       <AppBar
         position="fixed"
         sx={{
-          boxShadow: "none",
+          boxShadow: 'none',
           color: palette.text.primary,
           borderBottom: `1px solid ${palette.text.primary}`,
         }}
       >
         <Toolbar
           sx={{
-            justifyContent: "space-between",
+            justifyContent: 'space-between',
             backgroundColor: palette.background.paper,
           }}
         >
@@ -37,7 +37,7 @@ export const PartyNavBar = () => {
             <HomeIcon
               sx={{
                 color:
-                  palette.mode === "dark"
+                  palette.mode === 'dark'
                     ? palette.common.white
                     : palette.common.black,
               }}

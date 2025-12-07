@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext } from 'react';
 
 export const createContextUtil = <T extends unknown | null>() => {
   const context = createContext<T | undefined>(undefined);
@@ -6,7 +6,7 @@ export const createContextUtil = <T extends unknown | null>() => {
   const useContextHelper = () => {
     const contextHelp = useContext(context);
     if (contextHelp === undefined)
-      throw new Error("useContext must be inside a ContextProvider!");
+      throw new Error('useContext must be inside a ContextProvider!');
     return contextHelp;
   };
 

@@ -1,6 +1,6 @@
-import { type ReactNode, useMemo, useState } from "react";
-import { getParties, type IParty, setParties } from "../api/parties";
-import { ProviderPartyContext } from "./party-context";
+import { type ReactNode, useMemo, useState } from 'react';
+import { getParties, type IParty, setParties } from '../api/parties';
+import { ProviderPartyContext } from './party-context';
 
 type PartyContextProviderProps = {
   children: ReactNode;

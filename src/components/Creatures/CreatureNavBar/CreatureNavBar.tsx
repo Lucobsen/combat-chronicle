@@ -1,10 +1,10 @@
-import { Button, Link, Stack, Typography, useTheme } from "@mui/material";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import { TextModal } from "../../shared/Modals/TextModal";
-import { useState } from "react";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import { Button, Link, Stack, Typography, useTheme } from '@mui/material';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import { TextModal } from '../../shared/Modals/TextModal';
+import { useState } from 'react';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 interface INavBar {
   round: number;
@@ -32,14 +32,14 @@ export const NavBar = ({
         <AppBar
           position="fixed"
           sx={{
-            boxShadow: "none",
+            boxShadow: 'none',
             color: palette.text.primary,
             borderBottom: `1px solid ${palette.text.primary}`,
           }}
         >
           <Toolbar
             sx={{
-              justifyContent: "space-between",
+              justifyContent: 'space-between',
               backgroundColor: palette.background.paper,
             }}
           >
@@ -52,7 +52,7 @@ export const NavBar = ({
               <Link
                 href="/"
                 color={
-                  palette.mode === "light"
+                  palette.mode === 'light'
                     ? palette.common.black
                     : palette.common.white
                 }
@@ -76,7 +76,7 @@ export const NavBar = ({
                 <Button
                   sx={{
                     maxHeight: 32,
-                    whiteSpace: "nowrap",
+                    whiteSpace: 'nowrap',
                     minWidth: 82,
                     ml: 1,
                   }}
@@ -91,7 +91,7 @@ export const NavBar = ({
                 <Button
                   sx={{
                     maxHeight: 32,
-                    whiteSpace: "nowrap",
+                    whiteSpace: 'nowrap',
                     minWidth: 152,
                     ml: 1,
                   }}

@@ -1,4 +1,4 @@
-import { Box, Button, Modal, Stack, Typography, useTheme } from "@mui/material";
+import { Box, Button, Modal, Stack, Typography, useTheme } from '@mui/material';
 
 interface ITextModalProps {
   isOpen: boolean;
@@ -23,10 +23,10 @@ export const TextModal = ({
         borderRadius={2}
         sx={{
           bgcolor: palette.background.default,
-          position: "absolute",
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
+          position: 'absolute',
+          left: '50%',
+          top: '50%',
+          transform: 'translate(-50%, -50%)',
         }}
       >
         <Typography

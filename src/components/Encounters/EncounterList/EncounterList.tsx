@@ -1,10 +1,10 @@
-import { Button, Container, Stack } from "@mui/material";
-import { useState } from "react";
-import type { IEncounter } from "../../../api/encounters";
-import { useEncounterContext } from "../../../utils/encounter-context";
-import { NamingModal } from "../../shared/Modals/NamingModal";
-import { EncounterItem } from "../EncounterItem/EncounterItem";
-import { EmptyState } from "./EmptyState";
+import { Button, Container, Stack } from '@mui/material';
+import { useState } from 'react';
+import type { IEncounter } from '../../../api/encounters';
+import { useEncounterContext } from '../../../utils/encounter-context';
+import { NamingModal } from '../../shared/Modals/NamingModal';
+import { EncounterItem } from '../EncounterItem/EncounterItem';
+import { EmptyState } from './EmptyState';
 
 export const EncounterList = () => {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -29,7 +29,7 @@ export const EncounterList = () => {
       createdOn: new Date().toISOString(),
       lastUpdatedOn: new Date().toISOString(),
       round: 1,
-      activeCreatureId: "",
+      activeCreatureId: '',
       inProgress: false,
     };
 
@@ -70,12 +70,12 @@ export const EncounterList = () => {
               variant="contained"
               color="success"
               sx={{
-                fontWeight: "bold",
-                position: "fixed",
-                bottom: "5%",
-                left: "50%",
-                width: "60%",
-                transform: "translate(-50%, -50%)",
+                fontWeight: 'bold',
+                position: 'fixed',
+                bottom: '5%',
+                left: '50%',
+                width: '60%',
+                transform: 'translate(-50%, -50%)',
               }}
               onClick={() => setIsAddModalOpen(true)}
             >

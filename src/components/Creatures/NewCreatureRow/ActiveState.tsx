@@ -1,8 +1,8 @@
-import AddIcon from "@mui/icons-material/Add";
-import { Button, IconButton, Stack } from "@mui/material";
-import { useState } from "react";
-import { useCreatureContext } from "../../../utils/creature-context";
-import { NewCreatureModal } from "./NewCreatureModal";
+import AddIcon from '@mui/icons-material/Add';
+import { Button, IconButton, Stack } from '@mui/material';
+import { useState } from 'react';
+import { useCreatureContext } from '../../../utils/creature-context';
+import { NewCreatureModal } from './NewCreatureModal';
 
 interface IActiveStateProps {
   changeTurn: (step: -1 | 1) => void;

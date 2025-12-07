@@ -1,6 +1,6 @@
-import { Box, IconButton, Modal, Stack, TextField } from "@mui/material";
-import { useState } from "react";
-import AddIcon from "@mui/icons-material/Add";
+import { Box, IconButton, Modal, Stack, TextField } from '@mui/material';
+import { useState } from 'react';
+import AddIcon from '@mui/icons-material/Add';
 
 interface INamingModalProps {
   isOpen: boolean;
@@ -17,16 +17,16 @@ export const NamingModal = ({
   placeholder,
   label,
   onCreate,
-  value = "",
+  value = '',
 }: INamingModalProps) => {
-  const [newNameValue, setNewNameValue] = useState("");
+  const [newNameValue, setNewNameValue] = useState('');
 
   return (
     <Modal
       open={isOpen}
       onClose={() => {
-        if (newNameValue !== "") onCreate(newNameValue);
-        setNewNameValue("");
+        if (newNameValue !== '') onCreate(newNameValue);
+        setNewNameValue('');
         onClose();
       }}
     >
@@ -39,7 +39,7 @@ export const NamingModal = ({
         left="50%"
         top="50%"
         sx={{
-          transform: "translate(-50%, -50%)",
+          transform: 'translate(-50%, -50%)',
         }}
       >
         <Stack direction="row" spacing={1}>
@@ -53,7 +53,7 @@ export const NamingModal = ({
           />
 
           <IconButton
-            disabled={newNameValue === ""}
+            disabled={newNameValue === ''}
             color="success"
             onClick={() => onCreate(newNameValue)}
           >

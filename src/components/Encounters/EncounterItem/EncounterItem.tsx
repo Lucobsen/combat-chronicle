@@ -1,5 +1,5 @@
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import {
   Box,
   Divider,
@@ -9,19 +9,19 @@ import {
   Stack,
   Typography,
   useTheme,
-} from "@mui/material";
-import { differenceInHours, format } from "date-fns";
-import { useState } from "react";
-import { NamingModal } from "../../shared/Modals/NamingModal";
-import { TextModal } from "../../shared/Modals/TextModal";
+} from '@mui/material';
+import { differenceInHours, format } from 'date-fns';
+import { useState } from 'react';
+import { NamingModal } from '../../shared/Modals/NamingModal';
+import { TextModal } from '../../shared/Modals/TextModal';
 
 const getTime = (timeValue: string) => {
   const isOverTwentyFourHours =
     differenceInHours(new Date(timeValue).getTime(), Date.now()) > 24;
 
   return isOverTwentyFourHours
-    ? format(timeValue, "dd/MM/y")
-    : format(timeValue, "kk:mm");
+    ? format(timeValue, 'dd/MM/y')
+    : format(timeValue, 'kk:mm');
 };
 
 interface IEncounterItemProps {
@@ -56,7 +56,7 @@ export const EncounterItem = ({
         border={`1px solid ${palette.text.primary}`}
         borderRadius={2}
         p={1}
-        sx={{ width: "100%" }}
+        sx={{ width: '100%' }}
       >
         <Grid container alignItems="center">
           <Grid size={{ xs: 10.5 }} overflow="hidden " textOverflow="ellipsis">
@@ -82,7 +82,7 @@ export const EncounterItem = ({
               />
 
               <Typography fontSize="small">
-                {`${creatureCount === 0 ? "No" : creatureCount} Creatures`}
+                {`${creatureCount === 0 ? 'No' : creatureCount} Creatures`}
               </Typography>
 
               {inProgress && (

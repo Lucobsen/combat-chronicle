@@ -1,7 +1,7 @@
-import { Stack } from "@mui/material";
-import { ConditionIcon } from "./ConditionIcon";
-import { useSnackbar } from "notistack";
-import { useConditions } from "./conditions.hook";
+import { Stack } from '@mui/material';
+import { ConditionIcon } from './ConditionIcon';
+import { useSnackbar } from 'notistack';
+import { useConditions } from './conditions.hook';
 
 interface IConditionProps {
   name: string;
@@ -28,9 +28,9 @@ export const Conditions = ({
           updateCondition={() => {
             enqueueSnackbar(
               `${name} is ${
-                !currentConditions.includes(label) ? "now" : "no longer"
+                !currentConditions.includes(label) ? 'now' : 'no longer'
               } ${label}`,
-              { variant: "info" }
+              { variant: 'info' }
             );
             onUpdate(label);
           }}

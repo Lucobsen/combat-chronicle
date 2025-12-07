@@ -1,6 +1,6 @@
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import {
   Box,
   Grid,
@@ -8,12 +8,12 @@ import {
   ListItem,
   TextField,
   useTheme,
-} from "@mui/material";
-import { useEffect, useRef, useState } from "react";
-import type { ICreature } from "../../../api/encounters";
-import { useDebounce } from "../../../utils/debouce";
-import { TextModal } from "../../shared/Modals/TextModal";
-import { Conditions } from "../Conditions/Conditions";
+} from '@mui/material';
+import { useEffect, useRef, useState } from 'react';
+import type { ICreature } from '../../../api/encounters';
+import { useDebounce } from '../../../utils/debouce';
+import { TextModal } from '../../shared/Modals/TextModal';
+import { Conditions } from '../Conditions/Conditions';
 
 interface ICreatureProps {
   creature: ICreature;
@@ -49,8 +49,8 @@ export const Creature = ({
     const newConditions =
       index >= 0
         ? tempConditions.filter(
-          (currentCondition) => condition !== currentCondition
-        )
+            (currentCondition) => condition !== currentCondition
+          )
         : [...tempConditions, condition];
 
     onUpdate({
@@ -63,7 +63,7 @@ export const Creature = ({
     if (hasCurrentTurn === true)
       window.scrollTo({
         top: listItemRef.current?.offsetTop,
-        behavior: "smooth",
+        behavior: 'smooth',
       });
   }, [hasCurrentTurn]);
 
@@ -79,17 +79,19 @@ export const Creature = ({
           minHeight={60}
           width="100%"
           bgcolor={palette.background.default}
-          border={`1px solid ${palette.mode === "light"
-            ? palette.common.black
-            : palette.common.white
-            }`}
+          border={`1px solid ${
+            palette.mode === 'light'
+              ? palette.common.black
+              : palette.common.white
+          }`}
           borderRadius={2}
           p={1}
           boxShadow={
             hasCurrentTurn
-              ? `0 0 8px 2px ${isEnemy ? palette.error.main : palette.primary.main
-              }`
-              : "none"
+              ? `0 0 8px 2px ${
+                  isEnemy ? palette.error.main : palette.primary.main
+                }`
+              : 'none'
           }
         >
           <Grid container direction="row">

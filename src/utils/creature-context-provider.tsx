@@ -1,6 +1,6 @@
-import { useMemo, useState, type ReactNode } from "react";
-import { type ICreature } from "../api/encounters";
-import { ProviderCreatureContext } from "./creature-context";
+import { useMemo, useState, type ReactNode } from 'react';
+import { type ICreature } from '../api/encounters';
+import { ProviderCreatureContext } from './creature-context';
 
 type CreatureContextProviderProps = {
   children: ReactNode;
@@ -11,8 +11,8 @@ export const CreatureContextProvider = ({
 }: CreatureContextProviderProps) => {
   const [creature, setCreature] = useState<ICreature>({
     id: crypto.randomUUID(),
-    name: "",
-    initative: "",
+    name: '',
+    initative: '',
     isHidden: false,
     conditions: [],
     isEnemy: true,
@@ -21,12 +21,12 @@ export const CreatureContextProvider = ({
   const noInit =
     creature.initative === undefined ||
     creature.initative === null ||
-    creature.initative === "";
+    creature.initative === '';
 
   const noName =
     creature.name === undefined ||
     creature.name === null ||
-    creature.name === "";
+    creature.name === '';
 
   const value = useMemo(
     () => ({
@@ -35,8 +35,8 @@ export const CreatureContextProvider = ({
       resetCreature: () =>
         setCreature({
           id: crypto.randomUUID(),
-          name: "",
-          initative: "",
+          name: '',
+          initative: '',
           isHidden: false,
           conditions: [],
           isEnemy: true,

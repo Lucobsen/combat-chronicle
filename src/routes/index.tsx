@@ -1,6 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { EncounterList } from '../components/Encounters/EncounterList/EncounterList';
-import { EncountersNavBar } from '../components/Encounters/EncountersNavBar/EncountersNavBar';
 import { DesktopWarning } from '../components/shared/DesktopWarning/DesktopWarning';
 import { useIsMobile } from '../hooks/is-mobile.hook';
 
@@ -9,12 +8,7 @@ const Index = () => {
 
   if (!isMobile) return <DesktopWarning />;
 
-  return (
-    <>
-      <EncountersNavBar />
-      <EncounterList />
-    </>
-  );
+  return <EncounterList />;
 };
 
 export const Route = createFileRoute('/')({

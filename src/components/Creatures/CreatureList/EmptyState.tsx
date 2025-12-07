@@ -1,8 +1,8 @@
-import { Button, Divider, Stack, Typography, useTheme } from "@mui/material";
-import { useState } from "react";
-import type { IHero } from "../../../api/parties";
-import { usePartyContext } from "../../../utils/party-context";
-import { ImportModal } from "../../shared/Modals/ImportModal";
+import { Button, Divider, Stack, Typography, useTheme } from '@mui/material';
+import { useState } from 'react';
+import type { IHero } from '../../../api/parties';
+import { usePartyContext } from '../../../utils/party-context';
+import { ImportModal } from '../../shared/Modals/ImportModal';
 
 interface IEmptyStateProps {
   onImport: (heroes: IHero[]) => void;
@@ -30,7 +30,7 @@ export const EmptyState = ({ onImport }: IEmptyStateProps) => {
         width="80%"
         spacing={1}
         sx={{
-          transform: "translate(-50%, -50%)",
+          transform: 'translate(-50%, -50%)',
         }}
       >
         <Typography
@@ -55,7 +55,7 @@ export const EmptyState = ({ onImport }: IEmptyStateProps) => {
             <Divider
               orientation="horizontal"
               color={palette.divider}
-              sx={{ my: 2, width: "100%" }}
+              sx={{ my: 2, width: '100%' }}
             />
             <Typography
               textAlign="center"
@@ -70,7 +70,7 @@ export const EmptyState = ({ onImport }: IEmptyStateProps) => {
               size="small"
               variant="contained"
               color="success"
-              sx={{ width: "fit-content" }}
+              sx={{ width: 'fit-content' }}
               onClick={() => setIsPartyModalOpen(true)}
             >
               <b>IMPORT</b>
