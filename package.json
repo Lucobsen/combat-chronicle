@@ -12,7 +12,11 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^7.3.6",
     "@mui/material": "^7.3.6",
+    "@tanstack/react-router": "^1.140.0",
+    "@tanstack/react-router-devtools": "^1.140.0",
+    "@vercel/analytics": "^1.6.1",
     "date-fns": "^4.1.0",
     "notistack": "^3.0.2",
     "react": "^19.2.0",
@@ -20,6 +24,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@tanstack/router-plugin": "^1.140.0",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
