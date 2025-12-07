@@ -1,18 +1,19 @@
-import { Box, Stack, Typography, useTheme } from "@mui/material";
 import DesktopAccessDisabledIcon from "@mui/icons-material/DesktopAccessDisabled";
+import { Box, Stack, Typography, useTheme } from "@mui/material";
+
+const TextItem = ({ label }: { label: string }) => (
+  <Typography
+    textAlign="center"
+    variant="h5"
+    // TODO: fix
+    color='blue'
+  >
+    {label}
+  </Typography>
+);
 
 export const DesktopWarning = () => {
   const { palette, shape } = useTheme();
-
-  const TextItem = ({ label }: { label: string }) => (
-    <Typography
-      textAlign="center"
-      variant="h5"
-      color={palette.info.contrastText}
-    >
-      {label}
-    </Typography>
-  );
 
   return (
     <Stack
