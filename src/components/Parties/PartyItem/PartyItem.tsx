@@ -40,9 +40,7 @@ export const PartyItem = ({
   return (
     <Box
       width="100%"
-      border={`1px solid ${
-        palette.mode === 'light' ? palette.common.black : palette.common.white
-      }`}
+      border={`1px solid ${palette.common.white}`}
       bgcolor={palette.background.default}
       borderRadius={2}
       p={1}
@@ -52,10 +50,7 @@ export const PartyItem = ({
           size="small"
           onClick={() => setIsHeroListOpen(!isHeroListOpen)}
           sx={{
-            color:
-              palette.mode === 'light'
-                ? palette.common.black
-                : palette.common.white,
+            color: palette.common.white,
           }}
         >
           {isHeroListOpen ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
@@ -64,6 +59,10 @@ export const PartyItem = ({
           size="small"
           type="text"
           fullWidth
+          slotProps={{
+            input: { sx: { color: '#fff' } },
+            inputLabel: { sx: { color: '#fff' } },
+          }}
           defaultValue={name}
           onChange={({ target }) => onUpdatePartyName(target.value)}
           variant="standard"
