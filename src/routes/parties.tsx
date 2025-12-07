@@ -3,7 +3,7 @@ import { PartyList } from '../components/Parties/PartyList/PartyList';
 import { DesktopWarning } from '../components/shared/DesktopWarning/DesktopWarning';
 import { useIsMobile } from '../hooks/is-mobile.hook';
 
-export const Parties = () => {
+const Parties = () => {
   const isMobile = useIsMobile();
 
   if (!isMobile) return <DesktopWarning />;
