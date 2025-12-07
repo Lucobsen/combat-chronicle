@@ -21,7 +21,7 @@ export const DesktopWarning = () => {
     >
       <DesktopAccessDisabledIcon
         sx={{
-          color: palette.text.primary,
+          color: '#fff',
           fontSize: 160,
         }}
       />
