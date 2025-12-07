@@ -30,6 +30,7 @@ export const InitialState = ({
           size="small"
           type="number"
           label="Init"
+          slotProps={{ inputLabel: { sx: { color: '#fff' } } }}
           sx={{ width: '40%' }}
           onChange={({ target }) =>
             setCreature({ ...creature, initative: target.value })
@@ -45,6 +46,7 @@ export const InitialState = ({
           type="text"
           label="Name"
           fullWidth
+          slotProps={{ inputLabel: { sx: { color: '#fff' } } }}
           onChange={({ target }) =>
             setCreature({ ...creature, name: target.value })
           }
@@ -59,6 +61,7 @@ export const InitialState = ({
           type="number"
           label="HP"
           sx={{ width: '40%' }}
+          slotProps={{ inputLabel: { sx: { color: '#fff' } } }}
           onChange={({ target }) =>
             setCreature({ ...creature, hp: target.value })
           }
@@ -91,12 +94,13 @@ export const InitialState = ({
           value={creatureQuantity}
           sx={{ width: '20%' }}
           label="Quantity"
+          slotProps={{ inputLabel: { sx: { color: '#fff' } } }}
           onChange={({ target }) =>
             setCreatureQuantity(Number.parseInt(target.value))
           }
         >
           {quantities.map(({ label, value }) => (
-            <MenuItem key={value} value={value}>
+            <MenuItem key={value} value={value} color="#fff">
               {label}
             </MenuItem>
           ))}

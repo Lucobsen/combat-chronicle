@@ -1,6 +1,6 @@
+import AddIcon from '@mui/icons-material/Add';
 import { Box, IconButton, Modal, Stack, TextField } from '@mui/material';
 import { useState } from 'react';
-import AddIcon from '@mui/icons-material/Add';
 
 interface INamingModalProps {
   isOpen: boolean;
@@ -49,6 +49,7 @@ export const NamingModal = ({
             defaultValue={value}
             label={label}
             fullWidth
+            slotProps={{ inputLabel: { sx: { color: '#fff' } } }}
             onChange={({ target }) => setNewNameValue(target.value)}
           />
 

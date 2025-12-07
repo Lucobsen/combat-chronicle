@@ -37,7 +37,7 @@ export const EmptyState = ({ onImport }: IEmptyStateProps) => {
           textAlign="center"
           variant="h6"
           alignSelf="center"
-          color={palette.text.primary}
+          color="#fff"
         >
           Add creatures below to populate your encounter.
         </Typography>
@@ -45,7 +45,7 @@ export const EmptyState = ({ onImport }: IEmptyStateProps) => {
           textAlign="center"
           variant="h6"
           alignSelf="center"
-          color={palette.text.primary}
+          color="#fff"
         >
           Creatures with HP will be tracked as ENEMIES!
         </Typography>
