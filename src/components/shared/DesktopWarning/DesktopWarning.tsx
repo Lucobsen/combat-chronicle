@@ -5,8 +5,7 @@ const TextItem = ({ label }: { label: string }) => (
   <Typography
     textAlign="center"
     variant="h5"
-    // TODO: fix
-    color='blue'
+    color='white'
   >
     {label}
   </Typography>

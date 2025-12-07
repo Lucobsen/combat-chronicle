@@ -9,11 +9,9 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { useNavigate } from "@tanstack/react-router";
 
 export const EncountersNavBar = () => {
   const { palette } = useTheme();
-  const navigate = useNavigate();
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -21,14 +19,14 @@ export const EncountersNavBar = () => {
         position="fixed"
         sx={{
           boxShadow: "none",
-          color: palette.text.primary,
-          borderBottom: `1px solid ${palette.text.primary}`,
+          color: '#fff',
+          borderBottom: '1px solid #fff',
         }}
       >
         <Toolbar
           sx={{
             justifyContent: "space-between",
-            backgroundColor: palette.background.paper,
+            backgroundColor: palette.common.black,
           }}
         >
           <Stack
@@ -49,13 +47,11 @@ export const EncountersNavBar = () => {
             />
           </Stack>
 
-          <IconButton onClick={() => navigate("parties")}>
+          <IconButton  >
             <Groups3Icon
               sx={{
                 color:
-                  palette.mode === "dark"
-                    ? palette.common.white
-                    : palette.common.black,
+                  palette.common.white
               }}
             />
           </IconButton>

@@ -39,8 +39,7 @@ export const NewCreatureModal = ({
           textAlign="center"
           variant="h6"
           mb={2}
-          // TODO: fix
-          color='blue'
+          color='white'
         >
           Enter New Creature Details
         </Typography>

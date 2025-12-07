@@ -33,7 +33,7 @@ export const PartyNavBar = () => {
             Parties
           </Typography>
 
-          <IconButton onClick={() => navigate("../")}>
+          <IconButton onClick={() => navigate({ to: '..' })}>
             <HomeIcon
               sx={{
                 color:

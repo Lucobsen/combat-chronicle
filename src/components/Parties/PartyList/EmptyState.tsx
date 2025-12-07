@@ -20,8 +20,7 @@ export const EmptyState = ({ openModal }: IEmptyStateProps) => (
       variant="h6"
       alignSelf="center"
       textAlign="center"
-      // TODO: fix
-      color='blue'
+      color='white'
     >
       Nat 1, no parties found!
     </Typography>

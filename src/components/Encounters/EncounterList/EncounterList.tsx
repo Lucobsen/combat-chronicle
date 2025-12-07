@@ -1,5 +1,4 @@
 import { Button, Container, Stack } from "@mui/material";
-import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import type { IEncounter } from "../../../api/encounters";
 import { useEncounterContext } from "../../../utils/encounter-context";
@@ -8,7 +7,6 @@ import { EncounterItem } from "../EncounterItem/EncounterItem";
 import { EmptyState } from "./EmptyState";
 
 export const EncounterList = () => {
-  const navigate = useNavigate();
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const { encounters, updateEncounters } = useEncounterContext();
 
@@ -37,7 +35,7 @@ export const EncounterList = () => {
 
     updateEncounters([...encounters, newEncounter]);
 
-    navigate(newEncounter.id);
+    // navigate({ to: '..', search: { id: newEncounter.id } });
   };
 
   const handleOnDelete = (deletedId: string) => {
