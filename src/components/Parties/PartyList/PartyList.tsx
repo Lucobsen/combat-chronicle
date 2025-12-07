@@ -1,65 +1,31 @@
 import { Button, Container, Stack } from '@mui/material';
+import { useMutation, useQuery } from 'convex/react';
 import { useState } from 'react';
-import type { IHero } from '../../../api/parties';
-import { usePartyContext } from '../../../utils/party-context';
+import { api } from '../../../../convex/_generated/api';
+import type { Id } from '../../../../convex/_generated/dataModel';
+import type { HeroObject } from '../../../../convex/schema';
 import { NamingModal } from '../../shared/Modals/NamingModal';
 import { PartyItem } from '../PartyItem/PartyItem';
 import { EmptyState } from './EmptyState';
 
 export const PartyList = () => {
-  const { partyList, updatePartyList } = usePartyContext();
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
-  const handleOnCreate = (newPartyName: string) =>
-    updatePartyList([
-      ...partyList,
-      { id: crypto.randomUUID(), heroes: [], name: newPartyName },
-    ]);
+  const parties = useQuery(api.parties.get);
+  const partyList = parties ?? [];
+  const addParty = useMutation(api.parties.post);
+  const deleteParty = useMutation(api.parties.deleteParty);
+  const patchParty = useMutation(api.parties.patchParty);
 
-  const handleOnAdd = (partyIndex: number, updatedHeroes: IHero[]) => {
-    const tempList = [...partyList];
-    tempList[partyIndex].heroes = updatedHeroes;
-
-    updatePartyList(tempList);
-  };
-
-  const handleOnDelete = (partyIndex: number, deletedHeroId: string) => {
-    const tempList = [...partyList];
-    const updatedList = tempList[partyIndex].heroes.filter(
-      ({ id }) => id !== deletedHeroId
-    );
-
-    tempList[partyIndex].heroes = updatedList;
-
-    updatePartyList(tempList);
-  };
+  const handleOnAdd = (newParty: HeroObject) => addParty(newParty);
 
   const handleOnUpdate = (
-    partyIndex: number,
-    heroIndex: number,
-    updatedHeroName: string
-  ) => {
-    const tempList = [...partyList];
-    tempList[partyIndex].heroes[heroIndex].name = updatedHeroName;
+    id: Id<'parties'>,
+    heroes: { id: string; name: string }[],
+    name: string
+  ) => patchParty({ id, heroes: heroes, name });
 
-    updatePartyList(tempList);
-  };
-
-  const handleOnUpdatePartyName = (id: string, updatedPartyName: string) => {
-    const party = partyList.find((party) => party.id === id);
-
-    if (party === undefined) return;
-
-    party.name = updatedPartyName;
-
-    updatePartyList(partyList);
-  };
-
-  const handleOnDeleteParty = (deletedId: string) => {
-    const updatedList = partyList.filter(({ id }) => id !== deletedId);
-
-    updatePartyList(updatedList);
-  };
+  const handleOnDeleteParty = (id: Id<'parties'>) => deleteParty({ id });
 
   return (
     <>
@@ -67,24 +33,28 @@ export const PartyList = () => {
         {partyList.length > 0 ? (
           <>
             <Stack alignItems="center" spacing={2}>
-              {partyList.map(({ name, heroes, id }, index) => (
+              {partyList.map(({ _id, name, heroes }) => (
                 <PartyItem
                   name={name}
                   heroes={heroes}
-                  key={id}
-                  onDeleteParty={() => handleOnDeleteParty(id)}
+                  key={_id}
+                  onDeleteParty={() => handleOnDeleteParty(_id)}
                   onAdd={(newHeroName) =>
-                    handleOnAdd(index, [
-                      ...heroes,
-                      { id: crypto.randomUUID(), name: newHeroName },
-                    ])
+                    handleOnAdd({
+                      name: newHeroName,
+                      heroes: [],
+                    })
                   }
-                  onDelete={(heroId) => handleOnDelete(index, heroId)}
-                  onUpdate={(heroIndex, updatedHeroName) =>
-                    handleOnUpdate(index, heroIndex, updatedHeroName)
+                  onDelete={(heroId) =>
+                    handleOnUpdate(
+                      _id,
+                      heroes.filter((hero) => hero.id !== heroId),
+                      name
+                    )
                   }
+                  onUpdate={() => {}}
                   onUpdatePartyName={(updatedPartyName) =>
-                    handleOnUpdatePartyName(id, updatedPartyName)
+                    handleOnUpdate(_id, heroes, updatedPartyName)
                   }
                 />
               ))}
@@ -117,7 +87,10 @@ export const PartyList = () => {
         placeholder="Enter party name"
         label="Party Name"
         onCreate={(newName) => {
-          handleOnCreate(newName);
+          handleOnAdd({
+            heroes: [],
+            name: newName,
+          });
           setIsAddModalOpen(false);
         }}
       />

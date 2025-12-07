@@ -19,7 +19,7 @@ export const Route = createRootRoute({
               <Navbar />
               <Outlet />
               <Analytics />
-              <TanStackRouterDevtools position="top-left" />
+              <TanStackRouterDevtools />
             </SnackbarProvider>
           </EncounterContextProvider>
         </PartyContextProvider>
