@@ -12,23 +12,6 @@ code {
     source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-/* Apply a default color scheme */
-@media (prefers-color-scheme: no-preference) {
-  html {
-    background-color: #e0e0e0;
-  }
-}
-
-/* Apply a light color scheme */
-@media (prefers-color-scheme: light) {
-  html {
-    background-color: #e0e0e0;
-  }
-}
-
-/* Apply a dark color scheme */
-@media (prefers-color-scheme: dark) {
-  html {
-    background-color: #121212;
-  }
+html {
+  background-color: #121212;
 }

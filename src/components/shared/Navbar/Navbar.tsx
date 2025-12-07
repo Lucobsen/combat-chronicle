@@ -10,7 +10,7 @@ import {
   useTheme,
 } from '@mui/material';
 
-export const EncountersNavBar = () => {
+export const Navbar = () => {
   const { palette } = useTheme();
 
   return (
@@ -26,7 +26,7 @@ export const EncountersNavBar = () => {
         <Toolbar
           sx={{
             justifyContent: 'space-between',
-            backgroundColor: palette.common.black,
+            backgroundColor: ({ palette }) => palette.background.default,
           }}
         >
           <Stack
@@ -36,7 +36,7 @@ export const EncountersNavBar = () => {
             overflow="hidden"
           >
             <Typography fontWeight="bold" variant="h6">
-              Combat Chronicle
+              CC
             </Typography>
             <Chip
               variant={palette.mode === 'dark' ? 'outlined' : 'filled'}
