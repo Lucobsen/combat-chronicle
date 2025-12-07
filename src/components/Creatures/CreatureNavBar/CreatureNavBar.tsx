@@ -1,10 +1,10 @@
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Button, Link, Stack, Typography, useTheme } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import { TextModal } from '../../shared/Modals/TextModal';
 import { useState } from 'react';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { TextModal } from '../../shared/Modals/TextModal';
 
 interface INavBar {
   round: number;
@@ -33,14 +33,14 @@ export const NavBar = ({
           position="fixed"
           sx={{
             boxShadow: 'none',
-            color: palette.text.primary,
-            borderBottom: `1px solid ${palette.text.primary}`,
+            color: '#fff',
+            borderBottom: `1px solid ${palette.common.white}`,
           }}
         >
           <Toolbar
             sx={{
               justifyContent: 'space-between',
-              backgroundColor: palette.background.paper,
+              backgroundColor: palette.background.default,
             }}
           >
             <Stack
@@ -49,15 +49,7 @@ export const NavBar = ({
               alignItems="center"
               overflow="hidden"
             >
-              <Link
-                href="/"
-                color={
-                  palette.mode === 'light'
-                    ? palette.common.black
-                    : palette.common.white
-                }
-                underline="none"
-              >
+              <Link href="/" color={palette.common.white} underline="none">
                 <ArrowBackIosIcon fontSize="small" />
               </Link>
               <Typography

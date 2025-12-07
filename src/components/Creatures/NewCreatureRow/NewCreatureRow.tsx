@@ -44,19 +44,13 @@ export const NewCreatureRow = ({
         top: 'auto',
         boxShadow: 'none',
         bottom: 0,
-        borderTop: ({ palette }) =>
-          `1px solid ${
-            palette.mode === 'light'
-              ? palette.common.black
-              : palette.common.white
-          }`,
+        borderTop: ({ palette }) => `1px solid ${palette.common.white}`,
       }}
     >
       <Toolbar
         sx={{
           p: ({ spacing }) => spacing(1.5, 1),
-          backgroundColor: ({ palette }) =>
-            palette.mode === 'light' ? palette.common.white : '#121212',
+          backgroundColor: ({ palette }) => palette.background.default,
         }}
       >
         {inProgress ? (

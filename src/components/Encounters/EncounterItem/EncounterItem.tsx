@@ -52,8 +52,8 @@ export const EncounterItem = ({
       <Box
         width="80%"
         bgcolor={palette.background.default}
-        color={palette.text.primary}
-        border={`1px solid ${palette.text.primary}`}
+        color="#fff"
+        border={`1px solid ${palette.background.paper}`}
         borderRadius={2}
         p={1}
         sx={{ width: '100%' }}

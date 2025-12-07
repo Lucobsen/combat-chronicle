@@ -21,23 +21,21 @@ export const CreatureList = ({
 }: ICreatureList) => {
   const hasCreatures = creatureList.length > 0;
 
+  if (!hasCreatures) return <EmptyState onImport={onImport} />;
+
   return (
     <Container sx={{ px: 2, pt: 9, pb: 10 }}>
-      {hasCreatures ? (
-        <List disablePadding>
-          {creatureList.map((creature) => (
-            <Creature
-              hasCurrentTurn={activeCreatureId === creature.id}
-              key={creature.id}
-              creature={creature}
-              onUpdate={onUpdate}
-              onDelete={onDelete}
-            />
-          ))}
-        </List>
-      ) : (
-        <EmptyState onImport={onImport} />
-      )}
+      <List disablePadding>
+        {creatureList.map((creature) => (
+          <Creature
+            hasCurrentTurn={activeCreatureId === creature.id}
+            key={creature.id}
+            creature={creature}
+            onUpdate={onUpdate}
+            onDelete={onDelete}
+          />
+        ))}
+      </List>
     </Container>
   );
 };
