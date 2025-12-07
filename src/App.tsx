@@ -1,26 +1,12 @@
-import { ThemeProvider, createTheme, useMediaQuery } from "@mui/material";
+import { ThemeProvider } from "@mui/material";
 import { SnackbarProvider } from "notistack";
-import { useMemo } from "react";
+import { theme } from "./utils/ccTheme";
 import { EncounterContextProvider } from "./utils/encounter-context-provider";
 import { PartyContextProvider } from "./utils/party-context-provider";
 
 const App = () => {
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-  const mainTheme = useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode: prefersDarkMode ? "dark" : "light",
-        },
-      }),
-    [prefersDarkMode]
-  );
-
-
-
-
   return (
-    <ThemeProvider theme={mainTheme}>
+    <ThemeProvider theme={theme}>
       <PartyContextProvider>
         <EncounterContextProvider>
           <SnackbarProvider maxSnack={2} autoHideDuration={3000}>
