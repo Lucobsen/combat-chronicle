@@ -2,8 +2,7 @@ import { createRouter, RouterProvider } from '@tanstack/react-router';
 import { ConvexProvider, ConvexReactClient } from 'convex/react';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { useAuth0Context } from './auth/auth0';
-import { Auth0Wrapper } from './auth/auth0Wrapper';
+import { Auth0Wrapper, useAuth0Context } from './auth/auth0';
 import './index.css';
 import { routeTree } from './routeTree.gen';
 
@@ -12,7 +11,11 @@ const router = createRouter({
   routeTree,
   scrollRestoration: true,
   context: {
-    auth: undefined,
+    isAuthenticated: false,
+    isLoading: true,
+    login: () => {},
+    logout: () => {},
+    user: null,
   },
 });
 
