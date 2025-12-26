@@ -18,7 +18,7 @@ export const PartyList = () => {
   const deleteParty = useMutation(api.parties.deleteParty);
   const patchParty = useMutation(api.parties.patchParty);
 
-  const handleOnAdd = (
+  const handleOnAddNewParty = (
     newParty: Omit<PartyObject, 'createdBy' | 'updatedAt'>
   ) => addParty(newParty);
 
@@ -45,10 +45,15 @@ export const PartyList = () => {
                   key={_id}
                   onDeleteParty={() => handleOnDeleteParty(_id, createdBy)}
                   onAdd={(newHeroName) =>
-                    handleOnAdd({
-                      name: newHeroName,
-                      heroes: [],
-                    })
+                    handleOnUpdate(
+                      _id,
+                      [
+                        ...heroes,
+                        { name: newHeroName, id: crypto.randomUUID() },
+                      ],
+                      name,
+                      createdBy
+                    )
                   }
                   onDelete={(heroId) =>
                     handleOnUpdate(
@@ -93,7 +98,7 @@ export const PartyList = () => {
         placeholder="Enter party name"
         label="Party Name"
         onCreate={(newName) => {
-          handleOnAdd({
+          handleOnAddNewParty({
             heroes: [],
             name: newName,
           });
