@@ -20,7 +20,7 @@ interface IPartyItem {
   heroes: IHero[];
   onAdd: (newHeroName: string) => void;
   onDelete: (id: string) => void;
-  onUpdate: (heroIndex: number, updatedHeroName: string) => void;
+  onUpdate: (id: string, updatedHeroName: string) => void;
   onUpdatePartyName: (newName: string) => void;
   onDeleteParty: () => void;
 }
@@ -75,12 +75,12 @@ export const PartyItem = ({
 
       <Collapse in={isHeroListOpen} timeout="auto" unmountOnExit>
         <List>
-          {heroes.map(({ id, name }, index) => (
+          {heroes.map(({ id, name }) => (
             <HeroItem
               key={id}
               name={name}
               onDelete={() => onDelete(id)}
-              onUpdate={(updatedHeroName) => onUpdate(index, updatedHeroName)}
+              onUpdate={(updatedHeroName) => onUpdate(id, updatedHeroName)}
             />
           ))}
 

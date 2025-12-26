@@ -63,7 +63,16 @@ export const PartyList = () => {
                       createdBy
                     )
                   }
-                  onUpdate={() => {}}
+                  onUpdate={(id, newHeroName) =>
+                    handleOnUpdate(
+                      _id,
+                      heroes.map((hero) =>
+                        hero.id === id ? { ...hero, name: newHeroName } : hero
+                      ),
+                      name,
+                      createdBy
+                    )
+                  }
                   onUpdatePartyName={(updatedPartyName) =>
                     handleOnUpdate(_id, heroes, updatedPartyName, createdBy)
                   }
