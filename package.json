@@ -17,7 +17,7 @@
     "@mui/icons-material": "^7.3.6",
     "@mui/material": "^7.3.6",
     "@tanstack/react-router": "^1.140.0",
-    "@tanstack/react-router-devtools": "^1.140.0",
+    "@tanstack/react-router-devtools": "^1.141.1",
     "@vercel/analytics": "^1.6.1",
     "convex": "^1.30.0",
     "date-fns": "^4.1.0",
