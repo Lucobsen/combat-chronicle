@@ -1,7 +1,9 @@
 import { defineSchema, defineTable } from 'convex/server';
 import { v, type Infer } from 'convex/values';
 
-const hero = v.object({
+const party = v.object({
+  createdBy: v.string(),
+  updatedAt: v.number(),
   name: v.string(),
   heroes: v.array(
     v.object({
@@ -11,8 +13,8 @@ const hero = v.object({
   ),
 });
 
-export type HeroObject = Infer<typeof hero>;
+export type PartyObject = Infer<typeof party>;
 
 export default defineSchema({
-  parties: defineTable(hero),
+  parties: defineTable(party).index('by_createdBy', ['createdBy']),
 });
