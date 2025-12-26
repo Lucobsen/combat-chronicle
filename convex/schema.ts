@@ -15,6 +15,30 @@ const party = v.object({
 
 export type PartyObject = Infer<typeof party>;
 
+const creature = v.object({
+  createdBy: v.string(),
+  updatedAt: v.number(),
+  name: v.string(),
+  initative: v.string(),
+  hp: v.optional(v.string()),
+  isHidden: v.boolean(),
+  conditions: v.string(),
+  isEnemy: v.boolean(),
+});
+
+const encounter = v.object({
+  createdBy: v.string(),
+  updatedAt: v.number(),
+  name: v.string(),
+  creatures: v.array(creature),
+  round: v.number(),
+  activeCreatureId: v.string(),
+  inProgress: v.boolean(),
+});
+
+export type EncounterObject = Infer<typeof encounter>;
+
 export default defineSchema({
   parties: defineTable(party).index('by_createdBy', ['createdBy']),
+  encounters: defineTable(encounter).index('by_createdBy', ['createdBy']),
 });
