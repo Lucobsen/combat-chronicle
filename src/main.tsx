@@ -1,6 +1,5 @@
 import { createRouter, RouterProvider } from '@tanstack/react-router';
-import { ConvexReactClient } from 'convex/react';
-import { ConvexProviderWithAuth0 } from 'convex/react-auth0';
+import { ConvexProvider, ConvexReactClient } from 'convex/react';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Auth0Wrapper, useAuth0Context } from './auth/auth0';
@@ -45,9 +44,9 @@ const InnerApp = () => {
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Auth0Wrapper>
-      <ConvexProviderWithAuth0 client={convex}>
+      <ConvexProvider client={convex}>
         <InnerApp />
-      </ConvexProviderWithAuth0>
+      </ConvexProvider>
     </Auth0Wrapper>
   </StrictMode>
 );
