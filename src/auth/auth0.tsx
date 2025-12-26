@@ -19,6 +19,8 @@ export function Auth0Wrapper({ children }: { children: React.ReactNode }) {
       authorizationParams={{
         redirect_uri: window.location.origin,
       }}
+      useRefreshTokens={true}
+      cacheLocation="localstorage"
     >
       <Auth0ContextProvider>{children}</Auth0ContextProvider>
     </Auth0Provider>
