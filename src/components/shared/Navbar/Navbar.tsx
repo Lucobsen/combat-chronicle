@@ -1,5 +1,4 @@
-import Groups3RoundedIcon from '@mui/icons-material/Groups3Rounded';
-import ListAltRoundedIcon from '@mui/icons-material/ListAltRounded';
+import { useAuth0 } from '@auth0/auth0-react';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import {
   AppBar,
@@ -7,36 +6,18 @@ import {
   Chip,
   Drawer,
   IconButton,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
   Stack,
   Toolbar,
   Typography,
   useTheme,
 } from '@mui/material';
-import { useNavigate } from '@tanstack/react-router';
 import { useState } from 'react';
-
-const NavigationsItems = [
-  {
-    label: 'Home',
-    to: '/',
-    icon: <ListAltRoundedIcon sx={{ color: '#fff' }} />,
-  },
-  {
-    label: 'Parties',
-    to: '/parties',
-    icon: <Groups3RoundedIcon sx={{ color: '#fff' }} />,
-  },
-];
+import { MenuDrawer } from '../../Drawers/MenuDrawer';
 
 export const Navbar = () => {
   const { palette } = useTheme();
   const [open, setOpen] = useState(false);
-  const navigate = useNavigate();
+  const { isAuthenticated } = useAuth0();
 
   return (
     <>
@@ -71,53 +52,26 @@ export const Navbar = () => {
                 sx={{ fontSize: 8, height: 16 }}
               />
             </Stack>
-
-            <IconButton
-              disableRipple
-              disableFocusRipple
-              disableTouchRipple
-              onClick={() => setOpen(true)}
-            >
-              <MenuRoundedIcon
-                sx={{
-                  color: palette.common.white,
-                }}
-              />
-            </IconButton>
+            {isAuthenticated && (
+              <IconButton
+                disableRipple
+                disableFocusRipple
+                disableTouchRipple
+                onClick={() => setOpen(true)}
+              >
+                <MenuRoundedIcon
+                  sx={{
+                    color: palette.common.white,
+                  }}
+                />
+              </IconButton>
+            )}
           </Toolbar>
         </AppBar>
       </Box>
 
       <Drawer open={open} onClose={() => setOpen(false)}>
-        <Box
-          sx={{
-            borderRight: '1px solid #fff',
-            height: '100%',
-            bgcolor: ({ palette }) => palette.background.default,
-            width: '65vw',
-            maxWidth: '300px',
-            color: '#fff',
-          }}
-          role="presentation"
-        >
-          <List>
-            {NavigationsItems.map(({ label, to, icon }) => (
-              <ListItem key={label} disablePadding>
-                <ListItemButton
-                  onClick={() => {
-                    setOpen(false);
-                    navigate({ to });
-                  }}
-                  disableRipple
-                  disableTouchRipple
-                >
-                  <ListItemIcon>{icon}</ListItemIcon>
-                  <ListItemText primary={label} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-        </Box>
+        <MenuDrawer closeDrawer={() => setOpen(false)} />
       </Drawer>
     </>
   );
