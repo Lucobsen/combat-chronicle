@@ -68,7 +68,7 @@ export const Navbar = () => {
                 variant={palette.mode === 'dark' ? 'outlined' : 'filled'}
                 label="BETA"
                 color="success"
-                sx={{ fontSize: 8, height: 16 }}
+                sx={{ fontSize: 9, height: 16 }}
               />
             </Stack>
 
