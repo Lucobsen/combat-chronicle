@@ -3,7 +3,8 @@ import { useMutation, useQuery } from 'convex/react';
 import { useState } from 'react';
 import { api } from '../../../../convex/_generated/api';
 import type { Id } from '../../../../convex/_generated/dataModel';
-import type { HeroObject } from '../../../../convex/schema';
+import type { PartyObject } from '../../../../convex/schema';
+import type { IHero } from '../../../api/parties';
 import { NamingModal } from '../../shared/Modals/NamingModal';
 import { PartyItem } from '../PartyItem/PartyItem';
 import { EmptyState } from './EmptyState';
@@ -17,15 +18,19 @@ export const PartyList = () => {
   const deleteParty = useMutation(api.parties.deleteParty);
   const patchParty = useMutation(api.parties.patchParty);
 
-  const handleOnAdd = (newParty: HeroObject) => addParty(newParty);
+  const handleOnAdd = (
+    newParty: Omit<PartyObject, 'createdBy' | 'updatedAt'>
+  ) => addParty(newParty);
 
   const handleOnUpdate = (
     id: Id<'parties'>,
-    heroes: { id: string; name: string }[],
-    name: string
-  ) => patchParty({ id, heroes: heroes, name });
+    heroes: IHero[],
+    name: string,
+    createdBy: string
+  ) => patchParty({ id, heroes: heroes, name, createdBy });
 
-  const handleOnDeleteParty = (id: Id<'parties'>) => deleteParty({ id });
+  const handleOnDeleteParty = (id: Id<'parties'>, createdBy: string) =>
+    deleteParty({ id, createdBy });
 
   return (
     <>
@@ -33,12 +38,12 @@ export const PartyList = () => {
         {partyList.length > 0 ? (
           <>
             <Stack alignItems="center" spacing={2}>
-              {partyList.map(({ _id, name, heroes }) => (
+              {partyList.map(({ _id, name, heroes, createdBy }) => (
                 <PartyItem
                   name={name}
                   heroes={heroes}
                   key={_id}
-                  onDeleteParty={() => handleOnDeleteParty(_id)}
+                  onDeleteParty={() => handleOnDeleteParty(_id, createdBy)}
                   onAdd={(newHeroName) =>
                     handleOnAdd({
                       name: newHeroName,
@@ -49,12 +54,13 @@ export const PartyList = () => {
                     handleOnUpdate(
                       _id,
                       heroes.filter((hero) => hero.id !== heroId),
-                      name
+                      name,
+                      createdBy
                     )
                   }
                   onUpdate={() => {}}
                   onUpdatePartyName={(updatedPartyName) =>
-                    handleOnUpdate(_id, heroes, updatedPartyName)
+                    handleOnUpdate(_id, heroes, updatedPartyName, createdBy)
                   }
                 />
               ))}
