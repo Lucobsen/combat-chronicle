@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { api } from '../../../../convex/_generated/api';
 import type { Id } from '../../../../convex/_generated/dataModel';
 import type { PartyObject } from '../../../../convex/schema';
-import type { IHero } from '../../../api/parties';
 import { NamingModal } from '../../shared/Modals/NamingModal';
 import { PartyItem } from '../PartyItem/PartyItem';
 import { EmptyState } from './EmptyState';
@@ -24,7 +23,10 @@ export const PartyList = () => {
 
   const handleOnUpdate = (
     id: Id<'parties'>,
-    heroes: IHero[],
+    heroes: {
+      id: string;
+      name: string;
+    }[],
     name: string,
     createdBy: string
   ) => patchParty({ id, heroes: heroes, name, createdBy });

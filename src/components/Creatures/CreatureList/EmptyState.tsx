@@ -1,21 +1,32 @@
 import { Button, Divider, Stack, Typography, useTheme } from '@mui/material';
+import { useQuery } from 'convex/react';
 import { useState } from 'react';
-import type { IHero } from '../../../api/parties';
-import { usePartyContext } from '../../../utils/party-context';
+import { api } from '../../../../convex/_generated/api';
 import { ImportModal } from '../../shared/Modals/ImportModal';
 
 interface IEmptyStateProps {
-  onImport: (heroes: IHero[]) => void;
+  onImport: (
+    heroes: {
+      id: string;
+      name: string;
+    }[]
+  ) => void;
 }
 
 export const EmptyState = ({ onImport }: IEmptyStateProps) => {
   const { palette } = useTheme();
-  const { partyList } = usePartyContext();
+  const parties = useQuery(api.parties.get);
+  const partyList = parties ?? [];
   const [isPartyModalOpen, setIsPartyModalOpen] = useState(false);
 
   const partiesWithHeros = partyList.filter(({ heroes }) => heroes.length > 0);
 
-  const handleOnImport = (heroes: IHero[]) => {
+  const handleOnImport = (
+    heroes: {
+      id: string;
+      name: string;
+    }[]
+  ) => {
     onImport(heroes);
     setIsPartyModalOpen(false);
   };

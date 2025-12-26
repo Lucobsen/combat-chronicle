@@ -1,7 +1,6 @@
 import { Typography } from '@mui/material';
 import { createFileRoute } from '@tanstack/react-router';
 import type { ICreature } from '../api/encounters';
-import type { IHero } from '../api/parties';
 import { CreatureList } from '../components/Creatures/CreatureList/CreatureList';
 import { NavBar } from '../components/Creatures/CreatureNavBar/CreatureNavBar';
 import { NewCreatureRow } from '../components/Creatures/NewCreatureRow/NewCreatureRow';
@@ -31,7 +30,12 @@ const Creatures = () => {
   if (selectedEncounter === undefined)
     return <Typography color="error">Something went wrong...</Typography>;
 
-  const handleImport = (heroes: IHero[]) =>
+  const handleImport = (
+    heroes: {
+      id: string;
+      name: string;
+    }[]
+  ) =>
     updateSelectedEncounter({
       ...selectedEncounter,
       lastUpdatedOn: new Date().toISOString(),
