@@ -1,4 +1,5 @@
 import { ThemeProvider } from '@mui/material';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { createRootRouteWithContext, Outlet } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import { Analytics } from '@vercel/analytics/react';
@@ -16,7 +17,8 @@ export const Route = createRootRouteWithContext<Auth0ContextType>()({
           <Navbar />
           <Outlet />
           <Analytics />
-          <TanStackRouterDevtools position="bottom-right" />
+          <ReactQueryDevtools />
+          <TanStackRouterDevtools />
         </SnackbarProvider>
       </ScreenSizeContextProvider>
     </ThemeProvider>

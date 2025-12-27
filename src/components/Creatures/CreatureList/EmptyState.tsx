@@ -1,9 +1,10 @@
 import { Button, Divider, Stack, Typography, useTheme } from '@mui/material';
-import { useMutation, useQuery } from 'convex/react';
+import { useMutation } from 'convex/react';
 import { useState } from 'react';
 import { api } from '../../../../convex/_generated/api';
 import type { Id } from '../../../../convex/_generated/dataModel';
 import type { CreatureObject } from '../../../../convex/schema';
+import { useGetParties } from '../../../api/parties/useGetParties';
 import { ImportModal } from '../../shared/Modals/ImportModal';
 
 export const EmptyState = ({
@@ -16,10 +17,10 @@ export const EmptyState = ({
   const { palette } = useTheme();
   const [isPartyModalOpen, setIsPartyModalOpen] = useState(false);
 
-  const partyList = useQuery(api.parties.get) ?? [];
+  const { parties } = useGetParties();
   const addCreatures = useMutation(api.encounters.addCreatures);
 
-  const partiesWithHeros = partyList.filter(({ heroes }) => heroes.length > 0);
+  const partiesWithHeros = parties.filter(({ heroes }) => heroes.length > 0);
 
   const handleOnImport = (
     heroes: {
