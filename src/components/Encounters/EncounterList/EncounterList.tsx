@@ -1,4 +1,5 @@
 import { Button, Container, Stack } from '@mui/material';
+import { useNavigate } from '@tanstack/react-router';
 import { useMutation, useQuery } from 'convex/react';
 import { useState } from 'react';
 import { api } from '../../../../convex/_generated/api';
@@ -8,6 +9,7 @@ import { EncounterItem } from '../EncounterItem/EncounterItem';
 import { EmptyState } from './EmptyState';
 
 export const EncounterList = () => {
+  const navigate = useNavigate();
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   const encounters = useQuery(api.encounters.getEncounters) ?? [];
@@ -21,8 +23,8 @@ export const EncounterList = () => {
     createdBy: string
   ) => updateEncounterName({ id, name: newName, createdBy });
 
-  const handleOnCreate = (newName: string) => {
-    createEncounter({
+  const handleOnCreate = async (newName: string) => {
+    const res: Id<'encounters'> = await createEncounter({
       name: newName,
       creatures: [],
       round: 1,
@@ -32,8 +34,7 @@ export const EncounterList = () => {
 
     setIsAddModalOpen(false);
 
-    // TODO!
-    // navigate({ to: '..', search: { id: newEncounter.id } });
+    navigate({ to: '..', search: { id: res } });
   };
 
   const handleOnDelete = (id: Id<'encounters'>, createdBy: string) =>

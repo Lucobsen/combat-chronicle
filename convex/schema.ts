@@ -26,6 +26,8 @@ export const creature = v.object({
   isEnemy: v.boolean(),
 });
 
+export type CreatureObject = Infer<typeof creature>;
+
 const encounter = v.object({
   createdBy: v.string(),
   updatedAt: v.number(),

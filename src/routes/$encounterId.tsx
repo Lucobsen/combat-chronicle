@@ -1,5 +1,6 @@
-import { Typography } from '@mui/material';
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, useNavigate } from '@tanstack/react-router';
+import { useQuery } from 'convex/react';
+import { api } from '../../convex/_generated/api';
 import type { ICreature } from '../api/encounters';
 import { CreatureList } from '../components/Creatures/CreatureList/CreatureList';
 import { NavBar } from '../components/Creatures/CreatureNavBar/CreatureNavBar';
@@ -7,7 +8,6 @@ import { NewCreatureRow } from '../components/Creatures/NewCreatureRow/NewCreatu
 import { DesktopWarning } from '../components/shared/DesktopWarning/DesktopWarning';
 import { useIsMobile } from '../hooks/is-mobile.hook';
 import { CreatureContextProvider } from '../utils/creature-context-provider';
-import { useEncounterContext } from '../utils/encounter-context';
 
 const sortCreatures = (creatures: ICreature[]) =>
   creatures.sort(
@@ -17,18 +17,16 @@ const sortCreatures = (creatures: ICreature[]) =>
   );
 
 const Creatures = () => {
-  const { encounterId: id } = Route.useParams();
+  const navigate = useNavigate();
+  const { encounterId } = Route.useParams();
+
   const isMobile = useIsMobile();
-  const { encounters, updateSelectedEncounter } = useEncounterContext();
+  const encounters = useQuery(api.encounters.getEncounters) ?? [];
+  const selectedEncounter = encounters.find(({ _id }) => encounterId === _id);
+
+  if (!selectedEncounter) navigate({ to: '/' });
 
   if (!isMobile) return <DesktopWarning />;
-
-  const selectedEncounter = encounters.find(
-    ({ id: encounterId }) => id === encounterId
-  );
-
-  if (selectedEncounter === undefined)
-    return <Typography color="error">Something went wrong...</Typography>;
 
   const handleImport = (
     heroes: {
