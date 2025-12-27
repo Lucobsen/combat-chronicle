@@ -27,7 +27,7 @@ export const CreatureList = ({
     return <EmptyState createdBy={createdBy} encounterId={encounterId} />;
 
   return (
-    <Container sx={{ px: 2, pt: 9, pb: 10 }}>
+    <Container sx={{ px: 2, pt: 9, pb: 14 }}>
       <List disablePadding>
         {creatureList.map((creature) => (
           <Creature
