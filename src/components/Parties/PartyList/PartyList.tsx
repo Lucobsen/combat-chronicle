@@ -38,13 +38,13 @@ export const PartyList = () => {
     <>
       <Container sx={{ px: 2, pt: 9, pb: 8 }}>
         {isLoading ? (
-          <Stack alignItems="center">
-            <Skeleton width="100%" height="60px" />
-            <Skeleton width="100%" height="60px" />
-            <Skeleton width="100%" height="60px" />
-            <Skeleton width="100%" height="60px" />
-            <Skeleton width="100%" height="60px" />
-            <Skeleton width="100%" height="60px" />
+          <Stack alignItems="center" spacing={2}>
+            <Skeleton width="100%" height="52px" sx={{ transform: 'none' }} />
+            <Skeleton width="100%" height="52px" sx={{ transform: 'none' }} />
+            <Skeleton width="100%" height="52px" sx={{ transform: 'none' }} />
+            <Skeleton width="100%" height="52px" sx={{ transform: 'none' }} />
+            <Skeleton width="100%" height="52px" sx={{ transform: 'none' }} />
+            <Skeleton width="100%" height="52px" sx={{ transform: 'none' }} />
           </Stack>
         ) : parties.length > 0 ? (
           <>
