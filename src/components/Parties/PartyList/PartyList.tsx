@@ -118,11 +118,11 @@ export const PartyList = () => {
         placeholder="Enter party name"
         label="Party Name"
         onCreate={(newName) => {
+          setIsAddModalOpen(false);
           handleOnAddNewParty({
             heroes: [],
             name: newName,
           });
-          setIsAddModalOpen(false);
         }}
       />
     </>

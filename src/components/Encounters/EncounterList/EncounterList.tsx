@@ -25,6 +25,8 @@ export const EncounterList = () => {
   ) => updateEncounterName({ id, name: newName, createdBy });
 
   const handleOnCreate = async (newName: string) => {
+    setIsAddModalOpen(false);
+
     const res: Id<'encounters'> = await createEncounter({
       name: newName,
       creatures: [],
@@ -32,8 +34,6 @@ export const EncounterList = () => {
       activeCreatureId: '',
       inProgress: false,
     });
-
-    setIsAddModalOpen(false);
 
     navigate({ to: '..', search: { id: res } });
   };
