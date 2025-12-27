@@ -3,6 +3,19 @@ import type { CreatureObject } from '../../../../convex/schema';
 import { ActiveState } from './ActiveState';
 import { InitialState } from './InitialState';
 
+const creatureNameAdditions = [
+  'A',
+  'B',
+  'C',
+  'D',
+  'E',
+  'F',
+  'G',
+  'H',
+  'I',
+  'J',
+];
+
 interface INewCreatureRowProps {
   onAddSingleCreature: (newCreature: CreatureObject) => void;
   onAddMultipleCreatures: (newCreature: CreatureObject[]) => void;
@@ -18,12 +31,16 @@ export const NewCreatureRow = ({
 }: INewCreatureRowProps) => {
   const handleMultiAdd = (quantity: number, newCreature: CreatureObject) => {
     const newCreatures = [];
-    let start = 0;
+    let index = 0;
 
     do {
-      newCreatures.push({ ...newCreature, id: crypto.randomUUID() });
-      start++;
-    } while (start < quantity);
+      newCreatures.push({
+        ...newCreature,
+        id: crypto.randomUUID(),
+        name: `${newCreature.name} (${creatureNameAdditions[index]})`,
+      });
+      index++;
+    } while (index < quantity);
 
     onAddMultipleCreatures(newCreatures);
   };
