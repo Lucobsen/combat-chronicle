@@ -9,7 +9,6 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 import { quantities } from '../../../models/models';
-import { useCreatureContext } from '../../../utils/creature-context';
 
 interface IInitialStateProps {
   onSingleAdd: () => void;
@@ -20,7 +19,6 @@ export const InitialState = ({
   onSingleAdd,
   onMultiAdd,
 }: IInitialStateProps) => {
-  const { creature, isAddDisabled, setCreature } = useCreatureContext();
   const [creatureQuantity, setCreatureQuantity] = useState(1);
 
   return (
@@ -32,10 +30,8 @@ export const InitialState = ({
           label="Init"
           slotProps={{ inputLabel: { sx: { color: '#fff' } } }}
           sx={{ width: '40%' }}
-          onChange={({ target }) =>
-            setCreature({ ...creature, initative: target.value })
-          }
-          value={creature.initative}
+          onChange={({ target }) => console.log(target)}
+          value={''}
           variant="outlined"
           placeholder="Init"
           required
@@ -47,10 +43,8 @@ export const InitialState = ({
           label="Name"
           fullWidth
           slotProps={{ inputLabel: { sx: { color: '#fff' } } }}
-          onChange={({ target }) =>
-            setCreature({ ...creature, name: target.value })
-          }
-          value={creature.name}
+          onChange={({ target }) => console.log(target)}
+          value={''}
           variant="outlined"
           placeholder="Name"
           required
@@ -62,16 +56,14 @@ export const InitialState = ({
           label="HP"
           sx={{ width: '40%' }}
           slotProps={{ inputLabel: { sx: { color: '#fff' } } }}
-          onChange={({ target }) =>
-            setCreature({ ...creature, hp: target.value })
-          }
-          value={creature.hp ?? ''}
+          onChange={({ target }) => console.log(target)}
+          value={''}
           variant="outlined"
           placeholder="HP"
         />
 
         <IconButton
-          disabled={isAddDisabled}
+          disabled={false}
           color="success"
           onClick={() => {
             if (creatureQuantity > 1) {
@@ -111,9 +103,7 @@ export const InitialState = ({
             <Checkbox
               defaultChecked
               color="error"
-              onChange={(_event, checked) =>
-                setCreature({ ...creature, isEnemy: checked })
-              }
+              onChange={(_, checked) => console.log(checked)}
             />
           }
           label="ENEMY CREATURE?"

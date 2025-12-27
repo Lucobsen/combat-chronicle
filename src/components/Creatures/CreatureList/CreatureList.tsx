@@ -1,12 +1,12 @@
 import { Container, List } from '@mui/material';
-import type { ICreature } from '../../../api/encounters';
+import type { CreatureObject } from '../../../../convex/schema';
 import { Creature } from '../Creature/Creature';
 import { EmptyState } from './EmptyState';
 
 interface ICreatureList {
-  creatureList: ICreature[];
+  creatureList: CreatureObject[];
   activeCreatureId: string;
-  onUpdate: (updatedCreature: ICreature) => void;
+  onUpdate: (updatedCreature: CreatureObject) => void;
   onDelete: (deletedCreatureId: string) => void;
   onImport: (
     heroes: {

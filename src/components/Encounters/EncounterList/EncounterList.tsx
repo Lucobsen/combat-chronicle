@@ -46,29 +46,23 @@ export const EncounterList = () => {
         {encounters.length > 0 ? (
           <>
             <Stack alignItems="center" spacing={2}>
-              {encounters.map(
-                ({
-                  name,
-                  _id,
-                  updatedAt,
-                  inProgress,
-                  creatures,
-                  createdBy,
-                }) => (
-                  <EncounterItem
-                    key={_id}
-                    id={_id}
-                    name={name}
-                    creatureCount={creatures.length}
-                    inProgress={inProgress}
-                    updatedAt={updatedAt}
-                    onDelete={() => handleOnDelete(_id, createdBy)}
-                    onUpdate={(newName) =>
-                      handleNameChange(newName, _id, createdBy)
-                    }
-                  />
-                )
-              )}
+              {encounters.map((encounter) => (
+                <EncounterItem
+                  id={encounter._id}
+                  {...encounter}
+                  key={encounter._id}
+                  onDelete={() =>
+                    handleOnDelete(encounter._id, encounter.createdBy)
+                  }
+                  onUpdate={(newName) =>
+                    handleNameChange(
+                      newName,
+                      encounter._id,
+                      encounter.createdBy
+                    )
+                  }
+                />
+              ))}
             </Stack>
             <Button
               disabled={encounters.length >= 6}

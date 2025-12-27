@@ -6,7 +6,6 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { useCreatureContext } from '../../../utils/creature-context';
 
 interface INewCreatureModalProps {
   onAdd: () => void;
@@ -19,8 +18,6 @@ export const NewCreatureModal = ({
   isOpen,
   onClose,
 }: INewCreatureModalProps) => {
-  const { creature, isAddDisabled, setCreature } = useCreatureContext();
-
   return (
     <Modal open={isOpen} onClose={onClose}>
       <Box
@@ -46,10 +43,8 @@ export const NewCreatureModal = ({
               type="number"
               required
               fullWidth
-              onChange={({ target }) =>
-                setCreature({ ...creature, initative: target.value })
-              }
-              value={creature.initative}
+              onChange={({ target }) => console.log(target)}
+              value={''}
               variant="outlined"
               placeholder="Init"
             />
@@ -58,10 +53,8 @@ export const NewCreatureModal = ({
               size="small"
               type="number"
               fullWidth
-              onChange={({ target }) =>
-                setCreature({ ...creature, hp: target.value })
-              }
-              value={creature?.hp ?? ''}
+              onChange={({ target }) => console.log(target)}
+              value={''}
               variant="outlined"
               placeholder="HP"
             />
@@ -72,10 +65,8 @@ export const NewCreatureModal = ({
             type="text"
             required
             fullWidth
-            onChange={({ target }) =>
-              setCreature({ ...creature, name: target.value })
-            }
-            value={creature.name}
+            onChange={({ target }) => console.log(target)}
+            value={''}
             variant="outlined"
             placeholder="Name"
           />
@@ -90,7 +81,7 @@ export const NewCreatureModal = ({
               Cancel
             </Button>
             <Button
-              disabled={isAddDisabled}
+              disabled={false}
               variant="contained"
               fullWidth
               color="success"

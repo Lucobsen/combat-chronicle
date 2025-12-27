@@ -1,7 +1,6 @@
 import AddIcon from '@mui/icons-material/Add';
 import { Button, IconButton, Stack } from '@mui/material';
 import { useState } from 'react';
-import { useCreatureContext } from '../../../utils/creature-context';
 import { NewCreatureModal } from './NewCreatureModal';
 
 interface IActiveStateProps {
@@ -10,7 +9,6 @@ interface IActiveStateProps {
 }
 
 export const ActiveState = ({ changeTurn, onAdd }: IActiveStateProps) => {
-  const { resetCreature } = useCreatureContext();
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   return (
@@ -46,7 +44,6 @@ export const ActiveState = ({ changeTurn, onAdd }: IActiveStateProps) => {
         onAdd={onAdd}
         isOpen={isAddModalOpen}
         onClose={() => {
-          resetCreature();
           setIsAddModalOpen(false);
         }}
       />

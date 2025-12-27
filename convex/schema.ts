@@ -16,13 +16,14 @@ const party = v.object({
 export type PartyObject = Infer<typeof party>;
 
 export const creature = v.object({
+  id: v.string(),
   createdBy: v.string(),
   updatedAt: v.number(),
   name: v.string(),
   initative: v.string(),
   hp: v.optional(v.string()),
   isHidden: v.boolean(),
-  conditions: v.string(),
+  conditions: v.array(v.string()),
   isEnemy: v.boolean(),
 });
 
