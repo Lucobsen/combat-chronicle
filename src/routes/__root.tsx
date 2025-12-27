@@ -18,7 +18,7 @@ export const Route = createRootRouteWithContext<Auth0ContextType>()({
           <Outlet />
           <Analytics />
           <ReactQueryDevtools />
-          <TanStackRouterDevtools />
+          <TanStackRouterDevtools position="bottom-right" />
         </SnackbarProvider>
       </ScreenSizeContextProvider>
     </ThemeProvider>

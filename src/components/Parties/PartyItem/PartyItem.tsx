@@ -41,6 +41,7 @@ export const PartyItem = ({
 
   return (
     <Box
+      maxWidth="500px"
       width="100%"
       border={`1px solid ${palette.common.white}`}
       bgcolor={palette.background.default}

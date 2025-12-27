@@ -50,6 +50,7 @@ export const EncounterItem = ({
     <>
       <Box
         width="80%"
+        maxWidth="500px"
         bgcolor={palette.background.default}
         border={`1px solid ${palette.common.white}`}
         borderRadius={2}
