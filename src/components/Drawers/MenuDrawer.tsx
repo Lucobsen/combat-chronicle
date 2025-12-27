@@ -13,7 +13,7 @@ import { LogoutButton } from '../shared/Buttons/LogoutButton';
 
 const NavigationsItems = [
   {
-    label: 'Home',
+    label: 'Encounters',
     to: '/',
     icon: <ListAltRoundedIcon sx={{ color: '#fff' }} />,
   },

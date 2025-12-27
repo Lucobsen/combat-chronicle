@@ -1,4 +1,3 @@
-import { useAuth0 } from '@auth0/auth0-react';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import {
   AppBar,
@@ -11,13 +10,15 @@ import {
   Typography,
   useTheme,
 } from '@mui/material';
-import { useState } from 'react';
+import { Link } from '@tanstack/react-router';
+import { useContext, useState } from 'react';
+import { ScreenSizeContext } from '../../../utils/screen-size-context';
 import { MenuDrawer } from '../../Drawers/MenuDrawer';
 
 export const Navbar = () => {
   const { palette } = useTheme();
   const [open, setOpen] = useState(false);
-  const { isAuthenticated } = useAuth0();
+  const { isExtraSmallScreen } = useContext(ScreenSizeContext);
 
   return (
     <>
@@ -52,7 +53,7 @@ export const Navbar = () => {
                 sx={{ fontSize: 8, height: 16 }}
               />
             </Stack>
-            {isAuthenticated && (
+            {isExtraSmallScreen ? (
               <IconButton
                 disableRipple
                 disableFocusRipple
@@ -65,6 +66,27 @@ export const Navbar = () => {
                   }}
                 />
               </IconButton>
+            ) : (
+              <Stack direction="row" spacing={2}>
+                <Link
+                  to="/"
+                  style={{
+                    color: 'white',
+                    textDecoration: 'none',
+                  }}
+                >
+                  Encounters
+                </Link>
+                <Link
+                  to="/parties"
+                  style={{
+                    color: 'white',
+                    textDecoration: 'none',
+                  }}
+                >
+                  Parties
+                </Link>
+              </Stack>
             )}
           </Toolbar>
         </AppBar>
