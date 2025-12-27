@@ -16,21 +16,16 @@ export const NewCreatureRow = ({
   changeTurn,
   inProgress,
 }: INewCreatureRowProps) => {
-  const handleSingleAdd = () => {
-    onAddSingleCreature({
-      conditions: [],
-      createdBy: '',
-      id: crypto.randomUUID(),
-      initative: '',
-      isEnemy: true,
-      isHidden: false,
-      name: '',
-      updatedAt: Date.now(),
-    });
-  };
+  const handleMultiAdd = (quantity: number, newCreature: CreatureObject) => {
+    const newCreatures = [];
+    let start = 0;
 
-  const handleMultiAdd = () => {
-    onAddMultipleCreatures([]);
+    do {
+      newCreatures.push({ ...newCreature, id: crypto.randomUUID() });
+      start++;
+    } while (start < quantity);
+
+    onAddMultipleCreatures(newCreatures);
   };
 
   return (
@@ -50,11 +45,13 @@ export const NewCreatureRow = ({
         }}
       >
         {inProgress ? (
-          <ActiveState changeTurn={changeTurn} onAdd={handleSingleAdd} />
+          <ActiveState changeTurn={changeTurn} onAdd={onAddSingleCreature} />
         ) : (
           <InitialState
-            onSingleAdd={handleSingleAdd}
-            onMultiAdd={handleMultiAdd}
+            onSingleAdd={onAddSingleCreature}
+            onMultiAdd={(quantity, newCreature) =>
+              handleMultiAdd(quantity, newCreature)
+            }
           />
         )}
       </Toolbar>

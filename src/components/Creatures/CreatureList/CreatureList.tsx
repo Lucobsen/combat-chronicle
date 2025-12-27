@@ -1,4 +1,5 @@
 import { Container, List } from '@mui/material';
+import type { Id } from '../../../../convex/_generated/dataModel';
 import type { CreatureObject } from '../../../../convex/schema';
 import { Creature } from '../Creature/Creature';
 import { EmptyState } from './EmptyState';
@@ -6,14 +7,10 @@ import { EmptyState } from './EmptyState';
 interface ICreatureList {
   creatureList: CreatureObject[];
   activeCreatureId: string;
+  createdBy: string;
+  encounterId: Id<'encounters'>;
   onUpdate: (updatedCreature: CreatureObject) => void;
   onDelete: (deletedCreatureId: string) => void;
-  onImport: (
-    heroes: {
-      id: string;
-      name: string;
-    }[]
-  ) => void;
 }
 
 export const CreatureList = ({
@@ -21,11 +18,13 @@ export const CreatureList = ({
   activeCreatureId,
   onDelete,
   onUpdate,
-  onImport,
+  createdBy,
+  encounterId,
 }: ICreatureList) => {
   const hasCreatures = creatureList.length > 0;
 
-  if (!hasCreatures) return <EmptyState onImport={onImport} />;
+  if (!hasCreatures)
+    return <EmptyState createdBy={createdBy} encounterId={encounterId} />;
 
   return (
     <Container sx={{ px: 2, pt: 9, pb: 10 }}>

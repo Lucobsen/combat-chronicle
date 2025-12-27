@@ -1,23 +1,23 @@
 import { Button, Divider, Stack, Typography, useTheme } from '@mui/material';
-import { useQuery } from 'convex/react';
+import { useMutation, useQuery } from 'convex/react';
 import { useState } from 'react';
 import { api } from '../../../../convex/_generated/api';
+import type { Id } from '../../../../convex/_generated/dataModel';
+import type { CreatureObject } from '../../../../convex/schema';
 import { ImportModal } from '../../shared/Modals/ImportModal';
 
-interface IEmptyStateProps {
-  onImport: (
-    heroes: {
-      id: string;
-      name: string;
-    }[]
-  ) => void;
-}
-
-export const EmptyState = ({ onImport }: IEmptyStateProps) => {
+export const EmptyState = ({
+  createdBy,
+  encounterId,
+}: {
+  createdBy: string;
+  encounterId: Id<'encounters'>;
+}) => {
   const { palette } = useTheme();
-  const parties = useQuery(api.parties.get);
-  const partyList = parties ?? [];
   const [isPartyModalOpen, setIsPartyModalOpen] = useState(false);
+
+  const partyList = useQuery(api.parties.get) ?? [];
+  const addCreatures = useMutation(api.encounters.addCreatures);
 
   const partiesWithHeros = partyList.filter(({ heroes }) => heroes.length > 0);
 
@@ -27,7 +27,19 @@ export const EmptyState = ({ onImport }: IEmptyStateProps) => {
       name: string;
     }[]
   ) => {
-    onImport(heroes);
+    const newCreatures = heroes.map<CreatureObject>(({ id, name }) => ({
+      conditions: [],
+      id,
+      name,
+      isHidden: false,
+      initative: '',
+      isEnemy: false,
+      createdBy,
+      updatedAt: Date.now(),
+    }));
+
+    addCreatures({ id: encounterId, creatures: newCreatures, createdBy });
+
     setIsPartyModalOpen(false);
   };
 

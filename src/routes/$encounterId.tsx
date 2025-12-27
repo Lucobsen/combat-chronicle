@@ -42,28 +42,11 @@ const Creatures = () => {
     inProgress,
   } = selectedEncounter;
 
-  const handleImport = (
-    heroes: {
-      id: string;
-      name: string;
-    }[]
-  ) => {
-    const newCreatures = heroes.map<CreatureObject>(({ id, name }) => ({
-      conditions: [],
-      id,
-      name,
-      isHidden: false,
-      initative: '0',
-      isEnemy: false,
-      createdBy,
-      updatedAt: Date.now(),
-    }));
-
-    addCreatures({ id: _id, creatures: newCreatures, createdBy });
-  };
-
   const handleSingleAdd = (newCreature: CreatureObject) => {
-    const sortedCreatures = sortCreatures([...creatures, newCreature]);
+    const sortedCreatures = sortCreatures([
+      ...creatures,
+      { ...newCreature, createdBy, updatedAt: Date.now() },
+    ]);
 
     addCreatures({
       id: _id,
@@ -217,10 +200,10 @@ const Creatures = () => {
       <CreatureList
         activeCreatureId={activeCreatureId}
         creatureList={creatures}
-        // eslint-disable-next-line react-hooks/immutability
         onUpdate={handleUpdate}
         onDelete={handleDelete}
-        onImport={handleImport}
+        createdBy={createdBy}
+        encounterId={_id}
       />
       <NewCreatureRow
         changeTurn={handleTurnChange}
