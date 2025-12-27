@@ -1,3 +1,5 @@
+import { ConvexQueryClient } from '@convex-dev/react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { createRouter, RouterProvider } from '@tanstack/react-router';
 import { ConvexReactClient } from 'convex/react';
 import { ConvexProviderWithAuth0 } from 'convex/react-auth0';
@@ -8,6 +10,17 @@ import './index.css';
 import { routeTree } from './routeTree.gen';
 
 const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL as string);
+const convexQueryClient = new ConvexQueryClient(convex);
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      queryKeyHashFn: convexQueryClient.hashFn(),
+      queryFn: convexQueryClient.queryFn(),
+    },
+  },
+});
+convexQueryClient.connect(queryClient);
+
 const router = createRouter({
   routeTree,
   scrollRestoration: true,
@@ -46,7 +59,9 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Auth0Wrapper>
       <ConvexProviderWithAuth0 client={convex}>
-        <InnerApp />
+        <QueryClientProvider client={queryClient}>
+          <InnerApp />
+        </QueryClientProvider>
       </ConvexProviderWithAuth0>
     </Auth0Wrapper>
   </StrictMode>

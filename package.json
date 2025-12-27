@@ -13,10 +13,13 @@
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.11.0",
+    "@convex-dev/react-query": "^0.1.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^7.3.6",
     "@mui/material": "^7.3.6",
+    "@tanstack/react-query": "^5.90.12",
+    "@tanstack/react-query-devtools": "^5.91.1",
     "@tanstack/react-router": "^1.143.11",
     "@tanstack/react-router-devtools": "^1.143.11",
     "@vercel/analytics": "^1.6.1",
@@ -24,7 +27,8 @@
     "date-fns": "^4.1.0",
     "notistack": "^3.0.2",
     "react": "^19.2.3",
-    "react-dom": "^19.2.3"
+    "react-dom": "^19.2.3",
+    "react-error-boundary": "^6.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

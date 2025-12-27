@@ -1,9 +1,10 @@
-import { Button, Container, Stack } from '@mui/material';
-import { useMutation, useQuery } from 'convex/react';
+import { Button, Container, Skeleton, Stack } from '@mui/material';
+import { useMutation } from 'convex/react';
 import { useState } from 'react';
 import { api } from '../../../../convex/_generated/api';
 import type { Id } from '../../../../convex/_generated/dataModel';
 import type { PartyObject } from '../../../../convex/schema';
+import { useGetParties } from '../../../api/parties/useGetParties';
 import { NamingModal } from '../../shared/Modals/NamingModal';
 import { PartyItem } from '../PartyItem/PartyItem';
 import { EmptyState } from './EmptyState';
@@ -11,8 +12,7 @@ import { EmptyState } from './EmptyState';
 export const PartyList = () => {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
-  const parties = useQuery(api.parties.get);
-  const partyList = parties ?? [];
+  const { parties, isLoading } = useGetParties();
   const addParty = useMutation(api.parties.post);
   const deleteParty = useMutation(api.parties.deleteParty);
   const patchParty = useMutation(api.parties.patchParty);
@@ -37,10 +37,19 @@ export const PartyList = () => {
   return (
     <>
       <Container sx={{ px: 2, pt: 9, pb: 8 }}>
-        {partyList.length > 0 ? (
+        {isLoading ? (
+          <Stack alignItems="center">
+            <Skeleton width="100%" height="60px" />
+            <Skeleton width="100%" height="60px" />
+            <Skeleton width="100%" height="60px" />
+            <Skeleton width="100%" height="60px" />
+            <Skeleton width="100%" height="60px" />
+            <Skeleton width="100%" height="60px" />
+          </Stack>
+        ) : parties.length > 0 ? (
           <>
             <Stack alignItems="center" spacing={2}>
-              {partyList.map(({ _id, name, heroes, createdBy }) => (
+              {parties.map(({ _id, name, heroes, createdBy }) => (
                 <PartyItem
                   name={name}
                   heroes={heroes}
@@ -82,7 +91,7 @@ export const PartyList = () => {
               ))}
             </Stack>
             <Button
-              disabled={partyList.length >= 6}
+              disabled={parties.length >= 6}
               variant="contained"
               color="success"
               sx={{
