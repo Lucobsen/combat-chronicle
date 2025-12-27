@@ -58,8 +58,14 @@ export const EncounterItem = ({
       >
         <Grid container alignItems="center">
           <Grid size={{ xs: 10.5 }} overflow="hidden " textOverflow="ellipsis">
-            <Link to="/$encounterId" params={{ encounterId: id }}>
-              {name}
+            <Link
+              style={{ textDecoration: 'none' }}
+              to="/$encounterId"
+              params={{ encounterId: id }}
+            >
+              <Typography color="primary" variant="h5">
+                {name}
+              </Typography>
             </Link>
             <Stack direction="row" spacing={1}>
               <Typography fontSize="small" color="white">

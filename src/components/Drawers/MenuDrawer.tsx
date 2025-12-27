@@ -9,7 +9,7 @@ import {
   ListItemText,
 } from '@mui/material';
 import { useNavigate } from '@tanstack/react-router';
-import LogoutButton from '../Login/LogoutButton';
+import { LogoutButton } from '../shared/Buttons/LogoutButton';
 
 const NavigationsItems = [
   {
