@@ -1,13 +1,11 @@
 import { AppBar, Toolbar } from '@mui/material';
-import type { ICreature } from '../../../api/encounters';
-import { letterMapping } from '../../../models/models';
-import { useCreatureContext } from '../../../utils/creature-context';
+import type { CreatureObject } from '../../../../convex/schema';
 import { ActiveState } from './ActiveState';
 import { InitialState } from './InitialState';
 
 interface INewCreatureRowProps {
-  onAddSingleCreature: (newCreature: ICreature) => void;
-  onAddMultipleCreatures: (newCreature: ICreature[]) => void;
+  onAddSingleCreature: (newCreature: CreatureObject) => void;
+  onAddMultipleCreatures: (newCreature: CreatureObject[]) => void;
   changeTurn: (step: -1 | 1) => void;
   inProgress: boolean;
 }
@@ -18,23 +16,21 @@ export const NewCreatureRow = ({
   changeTurn,
   inProgress,
 }: INewCreatureRowProps) => {
-  const { creature, resetCreature } = useCreatureContext();
-
   const handleSingleAdd = () => {
-    onAddSingleCreature(creature);
-    resetCreature();
+    onAddSingleCreature({
+      conditions: [],
+      createdBy: '',
+      id: crypto.randomUUID(),
+      initative: '',
+      isEnemy: true,
+      isHidden: false,
+      name: '',
+      updatedAt: Date.now(),
+    });
   };
 
-  const handleMultiAdd = (creatureQuantity: number) => {
-    const keyArray = Array.from(Array(creatureQuantity).keys());
-    const creatures: ICreature[] = keyArray.map((count) => ({
-      ...creature,
-      name: `${creature.name} (${letterMapping[count]})`,
-      id: crypto.randomUUID(),
-    }));
-
-    onAddMultipleCreatures(creatures);
-    resetCreature();
+  const handleMultiAdd = () => {
+    onAddMultipleCreatures([]);
   };
 
   return (

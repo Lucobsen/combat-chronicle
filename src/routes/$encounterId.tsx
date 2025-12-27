@@ -1,16 +1,14 @@
-import { Typography } from '@mui/material';
-import { createFileRoute } from '@tanstack/react-router';
-import type { ICreature } from '../api/encounters';
-import type { IHero } from '../api/parties';
+import { createFileRoute, useNavigate } from '@tanstack/react-router';
+import { useMutation, useQuery } from 'convex/react';
+import { api } from '../../convex/_generated/api';
+import type { CreatureObject } from '../../convex/schema';
 import { CreatureList } from '../components/Creatures/CreatureList/CreatureList';
 import { NavBar } from '../components/Creatures/CreatureNavBar/CreatureNavBar';
 import { NewCreatureRow } from '../components/Creatures/NewCreatureRow/NewCreatureRow';
 import { DesktopWarning } from '../components/shared/DesktopWarning/DesktopWarning';
 import { useIsMobile } from '../hooks/is-mobile.hook';
-import { CreatureContextProvider } from '../utils/creature-context-provider';
-import { useEncounterContext } from '../utils/encounter-context';
 
-const sortCreatures = (creatures: ICreature[]) =>
+const sortCreatures = (creatures: CreatureObject[]) =>
   creatures.sort(
     (creatureA, creatureB) =>
       Number.parseInt(creatureB.initative) -
@@ -18,74 +16,99 @@ const sortCreatures = (creatures: ICreature[]) =>
   );
 
 const Creatures = () => {
-  const { encounterId: id } = Route.useParams();
+  const navigate = useNavigate();
+  const { encounterId } = Route.useParams();
   const isMobile = useIsMobile();
-  const { encounters, updateSelectedEncounter } = useEncounterContext();
 
+  const encounters = useQuery(api.encounters.getEncounters) ?? [];
+  const selectedEncounter = encounters.find(({ _id }) => encounterId === _id);
+
+  const addCreatures = useMutation(api.encounters.addCreatures);
+  const resetEncounter = useMutation(api.encounters.resetEncounter);
+  const updateEncounterTurn = useMutation(api.encounters.updateEncounterTurn);
+  const startEncounter = useMutation(api.encounters.startEncounter);
+  const setActiveCreatureId = useMutation(api.encounters.setActiveCreatureId);
+
+  if (!selectedEncounter) return navigate({ to: '/' });
   if (!isMobile) return <DesktopWarning />;
 
-  const selectedEncounter = encounters.find(
-    ({ id: encounterId }) => id === encounterId
-  );
+  const {
+    _id,
+    createdBy,
+    creatures,
+    round,
+    activeCreatureId,
+    name: encounterName,
+    inProgress,
+  } = selectedEncounter;
 
-  if (selectedEncounter === undefined)
-    return <Typography color="error">Something went wrong...</Typography>;
+  const handleImport = (
+    heroes: {
+      id: string;
+      name: string;
+    }[]
+  ) => {
+    const newCreatures = heroes.map<CreatureObject>(({ id, name }) => ({
+      conditions: [],
+      id,
+      name,
+      isHidden: false,
+      initative: '0',
+      isEnemy: false,
+      createdBy,
+      updatedAt: Date.now(),
+    }));
 
-  const handleImport = (heroes: IHero[]) =>
-    updateSelectedEncounter({
-      ...selectedEncounter,
-      lastUpdatedOn: new Date().toISOString(),
-      creatures: heroes.map<ICreature>(({ id, name }) => ({
-        conditions: [],
-        id,
-        name,
-        isHidden: false,
-        initative: ' 0',
-        isEnemy: false,
-      })),
+    addCreatures({ id: _id, creatures: newCreatures, createdBy });
+  };
+
+  const handleSingleAdd = (newCreature: CreatureObject) => {
+    const sortedCreatures = sortCreatures([...creatures, newCreature]);
+
+    addCreatures({
+      id: _id,
+      creatures: sortedCreatures,
+      createdBy,
     });
+  };
 
-  const handleSingleAdd = (newCreature: ICreature) =>
-    updateSelectedEncounter({
-      ...selectedEncounter,
-      lastUpdatedOn: new Date().toISOString(),
-      creatures: sortCreatures([...selectedEncounter.creatures, newCreature]),
-    });
+  const handleMultiAdd = (newCreatures: CreatureObject[]) => {
+    const sortedCreatures: CreatureObject[] = sortCreatures([
+      ...creatures,
+      ...newCreatures,
+    ]);
 
-  const handleMultiAdd = (newCreatures: ICreature[]) =>
-    updateSelectedEncounter({
-      ...selectedEncounter,
-      lastUpdatedOn: new Date().toISOString(),
-      creatures: sortCreatures([
-        ...selectedEncounter.creatures,
-        ...newCreatures,
-      ]),
+    addCreatures({
+      id: _id,
+      creatures: sortedCreatures,
+      createdBy,
     });
+  };
 
   const handleDelete = (deletedCreatureId: string) => {
-    const tempList = selectedEncounter.creatures.filter(
+    const tempList = creatures.filter(
       (creature) => creature.id !== deletedCreatureId
     );
 
     if (tempList.length === 0) {
-      updateSelectedEncounter({
-        ...selectedEncounter,
-        lastUpdatedOn: new Date().toISOString(),
+      resetEncounter({
+        id: _id,
+        createdBy,
         creatures: [],
-        round: 1,
-        activeCreatureId: '',
       });
     } else {
-      updateSelectedEncounter({
-        ...selectedEncounter,
-        lastUpdatedOn: new Date().toISOString(),
-        creatures: sortCreatures(tempList),
+      const sortedCreatures = sortCreatures(tempList);
+
+      addCreatures({
+        id: _id,
+        creatures: sortedCreatures,
+        createdBy,
       });
     }
   };
 
-  const handleUpdate = (updatedCreature: ICreature) => {
-    const tempList = selectedEncounter.creatures;
+  const handleUpdate = (updatedCreature: CreatureObject) => {
+    const tempList = [...creatures];
 
     const index = tempList.findIndex(
       (creature) => creature.id === updatedCreature.id
@@ -93,12 +116,9 @@ const Creatures = () => {
 
     if (index >= 0) {
       tempList[index] = updatedCreature;
+      const sortedCreatures = sortCreatures(tempList);
 
-      updateSelectedEncounter({
-        ...selectedEncounter,
-        lastUpdatedOn: new Date().toISOString(),
-        creatures: sortCreatures(tempList),
-      });
+      addCreatures({ id: _id, creatures: sortedCreatures, createdBy });
     }
   };
 
@@ -107,70 +127,59 @@ const Creatures = () => {
     creatureCount: number,
     firstCreatureId: string
   ) => {
-    const nextCreatureId =
-      selectedEncounter.creatures[currentIndex + 1]?.id ?? firstCreatureId;
+    const newRound = currentIndex + 1 === creatureCount ? round + 1 : round;
+    const nextCreatureId = creatures[currentIndex + 1]?.id ?? firstCreatureId;
 
-    const round =
-      currentIndex + 1 === creatureCount
-        ? selectedEncounter.round + 1
-        : selectedEncounter.round;
-
-    updateSelectedEncounter({
-      ...selectedEncounter,
-      round,
+    updateEncounterTurn({
+      id: _id,
+      round: newRound,
       activeCreatureId: nextCreatureId,
-      lastUpdatedOn: new Date().toISOString(),
+      createdBy,
     });
   };
 
   const decrementTurn = (currentIndex: number, creatureCount: number) => {
-    const newRound =
-      currentIndex === 0
-        ? selectedEncounter.round - 1
-        : selectedEncounter.round;
+    const newRound = currentIndex === 0 ? round - 1 : round;
 
-    const nextCreatureId =
-      currentIndex === 0
-        ? selectedEncounter.creatures[creatureCount - 1]?.id
-        : selectedEncounter.creatures[currentIndex - 1]?.id;
+    if (newRound !== 0) {
+      const nextCreatureId =
+        currentIndex === 0
+          ? creatures[creatureCount - 1]?.id
+          : creatures[currentIndex - 1]?.id;
 
-    if (newRound === 0) return;
-
-    updateSelectedEncounter({
-      ...selectedEncounter,
-      round: newRound,
-      activeCreatureId: nextCreatureId,
-      lastUpdatedOn: new Date().toISOString(),
-    });
+      updateEncounterTurn({
+        id: _id,
+        round: newRound,
+        activeCreatureId: nextCreatureId,
+        createdBy,
+      });
+    }
   };
 
   const handleTurnChange = (step: -1 | 1) => {
-    const creatureCount = selectedEncounter.creatures.length;
+    const creatureCount = creatures.length;
 
-    // is there a list of creatures
-    if (creatureCount === 0)
-      return updateSelectedEncounter({
-        ...selectedEncounter,
-        round: 1,
-        activeCreatureId: '',
-        lastUpdatedOn: new Date().toISOString(),
+    // if there is no creatures left
+    // reset the encounter
+    if (creatures.length === 0)
+      return resetEncounter({
+        id: _id,
+        createdBy,
+        creatures: [],
       });
 
-    const activeCreatureId = selectedEncounter.activeCreatureId;
-    const firstCreatureId = selectedEncounter.creatures[0].id;
+    const firstCreatureId = creatures[0].id;
+    const activeCreature = creatures.find(({ id }) => id === activeCreatureId);
 
-    // is the current saved ID present in the list of creatures
-    if (
-      selectedEncounter.creatures.find(({ id }) => id === activeCreatureId) ===
-      undefined
-    )
-      return updateSelectedEncounter({
-        ...selectedEncounter,
+    // if there is no active creature, set the first creature as the active one
+    if (activeCreature === undefined)
+      return setActiveCreatureId({
+        id: _id,
         activeCreatureId: firstCreatureId,
-        lastUpdatedOn: new Date().toISOString(),
+        createdBy,
       });
 
-    const currentIndex = selectedEncounter.creatures.findIndex(
+    const currentIndex = creatures.findIndex(
       ({ id }) => id === activeCreatureId
     );
 
@@ -182,49 +191,43 @@ const Creatures = () => {
   };
 
   const handleReset = () =>
-    updateSelectedEncounter({
-      ...selectedEncounter,
-      round: 1,
-      lastUpdatedOn: new Date().toISOString(),
-      activeCreatureId: '',
-      inProgress: false,
+    resetEncounter({
+      id: _id,
+      createdBy,
+      creatures: [],
     });
 
   const handleStartEncounter = () =>
-    updateSelectedEncounter({
-      ...selectedEncounter,
-      round: 1,
-      lastUpdatedOn: new Date().toISOString(),
-      activeCreatureId: selectedEncounter.creatures[0]?.id ?? '',
-      inProgress: true,
+    startEncounter({
+      id: _id,
+      createdBy,
+      activeCreatureId: creatures[0]?.id ?? '',
     });
 
   return (
     <>
       <NavBar
         onReset={handleReset}
-        encounterName={selectedEncounter.name}
-        round={selectedEncounter.round}
-        hasCreatures={selectedEncounter.creatures.length > 0}
+        encounterName={encounterName}
+        round={round}
+        hasCreatures={creatures.length > 0}
         startEncounter={handleStartEncounter}
-        inProgress={selectedEncounter.inProgress}
+        inProgress={inProgress}
       />
       <CreatureList
-        activeCreatureId={selectedEncounter.activeCreatureId}
-        creatureList={selectedEncounter.creatures}
+        activeCreatureId={activeCreatureId}
+        creatureList={creatures}
         // eslint-disable-next-line react-hooks/immutability
         onUpdate={handleUpdate}
         onDelete={handleDelete}
         onImport={handleImport}
       />
-      <CreatureContextProvider>
-        <NewCreatureRow
-          changeTurn={handleTurnChange}
-          onAddSingleCreature={handleSingleAdd}
-          onAddMultipleCreatures={handleMultiAdd}
-          inProgress={selectedEncounter.inProgress}
-        />
-      </CreatureContextProvider>
+      <NewCreatureRow
+        changeTurn={handleTurnChange}
+        onAddSingleCreature={handleSingleAdd}
+        onAddMultipleCreatures={handleMultiAdd}
+        inProgress={inProgress}
+      />
     </>
   );
 };

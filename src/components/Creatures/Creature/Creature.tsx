@@ -10,15 +10,15 @@ import {
   useTheme,
 } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
-import type { ICreature } from '../../../api/encounters';
+import type { CreatureObject } from '../../../../convex/schema';
 import { useDebounce } from '../../../utils/debouce';
 import { TextModal } from '../../shared/Modals/TextModal';
 import { Conditions } from '../Conditions/Conditions';
 
-interface ICreatureProps {
-  creature: ICreature;
+interface CreatureObjectProps {
+  creature: CreatureObject;
   onDelete: (deletedCreatureId: string) => void;
-  onUpdate: (updatedCreature: ICreature) => void;
+  onUpdate: (updatedCreature: CreatureObject) => void;
   hasCurrentTurn: boolean;
 }
 
@@ -27,17 +27,17 @@ export const Creature = ({
   creature,
   onDelete,
   hasCurrentTurn = false,
-}: ICreatureProps) => {
+}: CreatureObjectProps) => {
   const { id, conditions, name, initative, isHidden, hp, isEnemy } = creature;
 
   const listItemRef = useRef<HTMLLIElement>(null);
   const { palette } = useTheme();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const debouncedChangeHandler = useDebounce((args: unknown) => {
-    onUpdate(args as ICreature);
+    onUpdate(args as CreatureObject);
   }, 1000);
 
-  const handleUpdate = (updatedCreature: ICreature) =>
+  const handleUpdate = (updatedCreature: CreatureObject) =>
     debouncedChangeHandler(updatedCreature);
 
   const handleConditionChange = (condition: string) => {

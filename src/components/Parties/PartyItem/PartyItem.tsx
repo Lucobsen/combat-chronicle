@@ -11,13 +11,15 @@ import {
   useTheme,
 } from '@mui/material';
 import { useState } from 'react';
-import type { IHero } from '../../../api/parties';
 import { HeroItem } from '../HeroItem/HeroItem';
 import { NewHeroItem } from '../NewHeroItem/NewHeroItem';
 
 interface IPartyItem {
   name: string;
-  heroes: IHero[];
+  heroes: {
+    id: string;
+    name: string;
+  }[];
   onAdd: (newHeroName: string) => void;
   onDelete: (id: string) => void;
   onUpdate: (id: string, updatedHeroName: string) => void;
