@@ -6,21 +6,18 @@ import { SnackbarProvider } from 'notistack';
 import type { Auth0ContextType } from '../auth/auth0';
 import { Navbar } from '../components/shared/Navbar/Navbar';
 import { theme } from '../utils/ccTheme';
-import { EncounterContextProvider } from '../utils/encounter-context-provider';
 import { ScreenSizeContextProvider } from '../utils/screen-size-context-provider';
 
 export const Route = createRootRouteWithContext<Auth0ContextType>()({
   component: () => (
     <ThemeProvider theme={theme}>
       <ScreenSizeContextProvider>
-        <EncounterContextProvider>
-          <SnackbarProvider maxSnack={2} autoHideDuration={3000}>
-            <Navbar />
-            <Outlet />
-            <Analytics />
-            <TanStackRouterDevtools position="bottom-right" />
-          </SnackbarProvider>
-        </EncounterContextProvider>
+        <SnackbarProvider maxSnack={2} autoHideDuration={3000}>
+          <Navbar />
+          <Outlet />
+          <Analytics />
+          <TanStackRouterDevtools position="bottom-right" />
+        </SnackbarProvider>
       </ScreenSizeContextProvider>
     </ThemeProvider>
   ),

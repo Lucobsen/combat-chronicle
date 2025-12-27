@@ -15,7 +15,7 @@ const party = v.object({
 
 export type PartyObject = Infer<typeof party>;
 
-const creature = v.object({
+export const creature = v.object({
   createdBy: v.string(),
   updatedAt: v.number(),
   name: v.string(),

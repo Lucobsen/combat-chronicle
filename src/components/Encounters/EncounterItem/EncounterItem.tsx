@@ -15,9 +15,8 @@ import { useState } from 'react';
 import { NamingModal } from '../../shared/Modals/NamingModal';
 import { TextModal } from '../../shared/Modals/TextModal';
 
-const getTime = (timeValue: string) => {
-  const isOverTwentyFourHours =
-    differenceInHours(new Date(timeValue).getTime(), Date.now()) > 24;
+const getTime = (timeValue: number) => {
+  const isOverTwentyFourHours = differenceInHours(timeValue, Date.now()) > 24;
 
   return isOverTwentyFourHours
     ? format(timeValue, 'dd/MM/y')
@@ -28,8 +27,8 @@ interface IEncounterItemProps {
   id: string;
   name: string;
   onUpdate: (newName: string) => void;
-  onDelete: (id: string) => void;
-  lastUpdatedOn: string;
+  onDelete: () => void;
+  updatedAt: number;
   inProgress: boolean;
   creatureCount: number;
 }
@@ -39,7 +38,7 @@ export const EncounterItem = ({
   name,
   onUpdate,
   onDelete,
-  lastUpdatedOn,
+  updatedAt,
   inProgress,
   creatureCount,
 }: IEncounterItemProps) => {
@@ -72,7 +71,7 @@ export const EncounterItem = ({
             </Link>
             <Stack direction="row" spacing={1}>
               <Typography fontSize="small">
-                Updated: {getTime(lastUpdatedOn)}
+                Updated: {getTime(updatedAt)}
               </Typography>
 
               <Divider
@@ -136,7 +135,7 @@ export const EncounterItem = ({
         isOpen={isDeleteOpen}
         onClose={() => setIsDeleteOpen(false)}
         onConfirm={() => {
-          onDelete(id);
+          onDelete();
           setIsDeleteOpen(false);
         }}
         content={`Do you wish to delete "${name}"?`}
