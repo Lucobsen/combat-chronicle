@@ -5,8 +5,6 @@ import type { CreatureObject } from '../../convex/schema';
 import { CreatureList } from '../components/Creatures/CreatureList/CreatureList';
 import { NavBar } from '../components/Creatures/CreatureNavBar/CreatureNavBar';
 import { NewCreatureRow } from '../components/Creatures/NewCreatureRow/NewCreatureRow';
-import { DesktopWarning } from '../components/shared/DesktopWarning/DesktopWarning';
-import { useIsMobile } from '../hooks/is-mobile.hook';
 
 const sortCreatures = (creatures: CreatureObject[]) =>
   creatures.sort(
@@ -18,7 +16,6 @@ const sortCreatures = (creatures: CreatureObject[]) =>
 const Creatures = () => {
   const navigate = useNavigate();
   const { encounterId } = Route.useParams();
-  const isMobile = useIsMobile();
 
   const encounters = useQuery(api.encounters.getEncounters) ?? [];
   const selectedEncounter = encounters.find(({ _id }) => encounterId === _id);
@@ -30,7 +27,6 @@ const Creatures = () => {
   const setActiveCreatureId = useMutation(api.encounters.setActiveCreatureId);
 
   if (!selectedEncounter) return navigate({ to: '/' });
-  if (!isMobile) return <DesktopWarning />;
 
   const {
     _id,

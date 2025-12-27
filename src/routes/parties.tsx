@@ -2,8 +2,6 @@ import { Box, Container, Typography } from '@mui/material';
 import { createFileRoute } from '@tanstack/react-router';
 import { ErrorBoundary } from 'react-error-boundary';
 import { PartyList } from '../components/Parties/PartyList/PartyList';
-import { DesktopWarning } from '../components/shared/DesktopWarning/DesktopWarning';
-import { useIsMobile } from '../hooks/is-mobile.hook';
 
 const fallbackComponent = (
   <Container sx={{ px: 2, pt: 10, pb: 8 }}>
@@ -15,17 +13,11 @@ const fallbackComponent = (
   </Container>
 );
 
-const Parties = () => {
-  const isMobile = useIsMobile();
-
-  if (!isMobile) return <DesktopWarning />;
-
-  return (
-    <ErrorBoundary fallback={fallbackComponent}>
-      <PartyList />
-    </ErrorBoundary>
-  );
-};
+const Parties = () => (
+  <ErrorBoundary fallback={fallbackComponent}>
+    <PartyList />
+  </ErrorBoundary>
+);
 
 export const Route = createFileRoute('/parties')({
   component: Parties,
