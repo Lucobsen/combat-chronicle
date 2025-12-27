@@ -173,13 +173,6 @@ const Creatures = () => {
     if (step === -1) decrementTurn(currentIndex, creatureCount);
   };
 
-  const handleReset = () =>
-    resetEncounter({
-      id: _id,
-      createdBy,
-      creatures: [],
-    });
-
   const handleStartEncounter = () =>
     startEncounter({
       id: _id,
@@ -190,7 +183,13 @@ const Creatures = () => {
   return (
     <>
       <NavBar
-        onReset={handleReset}
+        onReset={() =>
+          resetEncounter({
+            id: _id,
+            createdBy,
+            creatures,
+          })
+        }
         encounterName={encounterName}
         round={round}
         hasCreatures={creatures.length > 0}
