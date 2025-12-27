@@ -39,12 +39,36 @@ export const PartyList = () => {
       <Container sx={{ px: 2, pt: 9, pb: 8 }}>
         {isLoading ? (
           <Stack alignItems="center" spacing={2}>
-            <Skeleton width="100%" height="52px" sx={{ transform: 'none' }} />
-            <Skeleton width="100%" height="52px" sx={{ transform: 'none' }} />
-            <Skeleton width="100%" height="52px" sx={{ transform: 'none' }} />
-            <Skeleton width="100%" height="52px" sx={{ transform: 'none' }} />
-            <Skeleton width="100%" height="52px" sx={{ transform: 'none' }} />
-            <Skeleton width="100%" height="52px" sx={{ transform: 'none' }} />
+            <Skeleton
+              width="100%"
+              height="52px"
+              sx={{ maxWidth: '500px', transform: 'none' }}
+            />
+            <Skeleton
+              width="100%"
+              height="52px"
+              sx={{ maxWidth: '500px', transform: 'none' }}
+            />
+            <Skeleton
+              width="100%"
+              height="52px"
+              sx={{ maxWidth: '500px', transform: 'none' }}
+            />
+            <Skeleton
+              width="100%"
+              height="52px"
+              sx={{ maxWidth: '500px', transform: 'none' }}
+            />
+            <Skeleton
+              width="100%"
+              height="52px"
+              sx={{ maxWidth: '500px', transform: 'none' }}
+            />
+            <Skeleton
+              width="100%"
+              height="52px"
+              sx={{ maxWidth: '500px', transform: 'none' }}
+            />
           </Stack>
         ) : parties.length > 0 ? (
           <>
@@ -99,12 +123,12 @@ export const PartyList = () => {
                 position: 'fixed',
                 bottom: '5%',
                 left: '50%',
-                width: '60%',
+                maxWidth: 'fit-content',
                 transform: 'translate(-50%, -50%)',
               }}
               onClick={() => setIsAddModalOpen(true)}
             >
-              Add party
+              Add new party
             </Button>
           </>
         ) : (

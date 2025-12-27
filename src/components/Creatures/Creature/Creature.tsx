@@ -73,9 +73,10 @@ export const Creature = ({
         ref={listItemRef}
         disableGutters
         disablePadding
-        sx={{ pb: 2, opacity: isHidden ? 0.2 : 1 }}
+        sx={{ pb: 2, opacity: isHidden ? 0.2 : 1, justifyContent: 'center' }}
       >
         <Box
+          maxWidth="500px"
           minHeight={60}
           width="100%"
           bgcolor={palette.background.default}

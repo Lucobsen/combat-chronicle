@@ -46,10 +46,26 @@ export const EncounterList = () => {
       <Container sx={{ px: 4, pt: 9, pb: 8 }}>
         {isLoading ? (
           <Stack alignItems="center" spacing={2}>
-            <Skeleton width="100%" height="86px" sx={{ transform: 'none' }} />
-            <Skeleton width="100%" height="86px" sx={{ transform: 'none' }} />
-            <Skeleton width="100%" height="86px" sx={{ transform: 'none' }} />
-            <Skeleton width="100%" height="86px" sx={{ transform: 'none' }} />
+            <Skeleton
+              width="100%"
+              height="86px"
+              sx={{ maxWidth: '500px', transform: 'none' }}
+            />
+            <Skeleton
+              width="100%"
+              height="86px"
+              sx={{ maxWidth: '500px', transform: 'none' }}
+            />
+            <Skeleton
+              width="100%"
+              height="86px"
+              sx={{ maxWidth: '500px', transform: 'none' }}
+            />
+            <Skeleton
+              width="100%"
+              height="86px"
+              sx={{ maxWidth: '500px', transform: 'none' }}
+            />
           </Stack>
         ) : encounters.length > 0 ? (
           <>
@@ -77,11 +93,11 @@ export const EncounterList = () => {
               variant="contained"
               color="success"
               sx={{
+                maxWidth: 'fit-content',
                 fontWeight: 'bold',
                 position: 'fixed',
                 bottom: '5%',
                 left: '50%',
-                width: '60%',
                 transform: 'translate(-50%, -50%)',
               }}
               onClick={() => setIsAddModalOpen(true)}
