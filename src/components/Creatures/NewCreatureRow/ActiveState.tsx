@@ -1,11 +1,12 @@
 import AddIcon from '@mui/icons-material/Add';
 import { Button, IconButton, Stack } from '@mui/material';
 import { useState } from 'react';
+import type { CreatureObject } from '../../../../convex/schema';
 import { NewCreatureModal } from './NewCreatureModal';
 
 interface IActiveStateProps {
   changeTurn: (step: -1 | 1) => void;
-  onAdd: () => void;
+  onAdd: (newCreature: CreatureObject) => void;
 }
 
 export const ActiveState = ({ changeTurn, onAdd }: IActiveStateProps) => {

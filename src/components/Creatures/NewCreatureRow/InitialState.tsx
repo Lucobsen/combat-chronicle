@@ -8,17 +8,32 @@ import {
   TextField,
 } from '@mui/material';
 import { useState } from 'react';
+import type { CreatureObject } from '../../../../convex/schema';
 import { quantities } from '../../../models/models';
 
 interface IInitialStateProps {
-  onSingleAdd: () => void;
-  onMultiAdd: (creatureQuantity: number) => void;
+  onSingleAdd: (newCreature: CreatureObject) => void;
+  onMultiAdd: (creatureQuantity: number, newCreature: CreatureObject) => void;
 }
 
 export const InitialState = ({
   onSingleAdd,
   onMultiAdd,
 }: IInitialStateProps) => {
+  const defaultCreature: CreatureObject = {
+    hp: '',
+    conditions: [],
+    id: crypto.randomUUID(),
+    initative: '',
+    isEnemy: true,
+    name: '',
+    isHidden: false,
+    createdBy: '',
+    updatedAt: 0,
+  };
+
+  const [newCreature, setNewCreature] =
+    useState<CreatureObject>(defaultCreature);
   const [creatureQuantity, setCreatureQuantity] = useState(1);
 
   return (
@@ -30,8 +45,10 @@ export const InitialState = ({
           label="Init"
           slotProps={{ inputLabel: { sx: { color: '#fff' } } }}
           sx={{ width: '40%' }}
-          onChange={({ target }) => console.log(target)}
-          value={''}
+          onChange={({ target }) =>
+            setNewCreature({ ...newCreature, initative: target.value })
+          }
+          value={newCreature.initative}
           variant="outlined"
           placeholder="Init"
           required
@@ -43,8 +60,10 @@ export const InitialState = ({
           label="Name"
           fullWidth
           slotProps={{ inputLabel: { sx: { color: '#fff' } } }}
-          onChange={({ target }) => console.log(target)}
-          value={''}
+          onChange={({ target }) =>
+            setNewCreature({ ...newCreature, name: target.value })
+          }
+          value={newCreature.name}
           variant="outlined"
           placeholder="Name"
           required
@@ -56,22 +75,26 @@ export const InitialState = ({
           label="HP"
           sx={{ width: '40%' }}
           slotProps={{ inputLabel: { sx: { color: '#fff' } } }}
-          onChange={({ target }) => console.log(target)}
-          value={''}
+          onChange={({ target }) =>
+            setNewCreature({ ...newCreature, hp: target.value })
+          }
+          value={newCreature.hp}
           variant="outlined"
           placeholder="HP"
         />
 
         <IconButton
-          disabled={false}
+          disabled={!newCreature.initative || !newCreature.name}
           color="success"
           onClick={() => {
             if (creatureQuantity > 1) {
-              onMultiAdd(creatureQuantity);
+              onMultiAdd(creatureQuantity, newCreature);
               setCreatureQuantity(1);
             } else {
-              onSingleAdd();
+              onSingleAdd(newCreature);
             }
+
+            setNewCreature(defaultCreature);
           }}
         >
           <AddIcon />
@@ -103,7 +126,9 @@ export const InitialState = ({
             <Checkbox
               defaultChecked
               color="error"
-              onChange={(_, checked) => console.log(checked)}
+              onChange={(_, checked) =>
+                setNewCreature({ ...newCreature, isEnemy: checked })
+              }
             />
           }
           label="ENEMY CREATURE?"

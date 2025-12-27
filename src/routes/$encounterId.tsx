@@ -43,7 +43,10 @@ const Creatures = () => {
   } = selectedEncounter;
 
   const handleSingleAdd = (newCreature: CreatureObject) => {
-    const sortedCreatures = sortCreatures([...creatures, newCreature]);
+    const sortedCreatures = sortCreatures([
+      ...creatures,
+      { ...newCreature, createdBy, updatedAt: Date.now() },
+    ]);
 
     addCreatures({
       id: _id,

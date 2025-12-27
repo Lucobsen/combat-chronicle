@@ -6,9 +6,11 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { useState } from 'react';
+import type { CreatureObject } from '../../../../convex/schema';
 
 interface INewCreatureModalProps {
-  onAdd: () => void;
+  onAdd: (newCreature: CreatureObject) => void;
   onClose: () => void;
   isOpen: boolean;
 }
@@ -18,6 +20,21 @@ export const NewCreatureModal = ({
   isOpen,
   onClose,
 }: INewCreatureModalProps) => {
+  const defaultCreature: CreatureObject = {
+    hp: '',
+    conditions: [],
+    id: crypto.randomUUID(),
+    initative: '',
+    isEnemy: true,
+    name: '',
+    isHidden: false,
+    createdBy: '',
+    updatedAt: 0,
+  };
+
+  const [newCreature, setNewCreature] =
+    useState<CreatureObject>(defaultCreature);
+
   return (
     <Modal open={isOpen} onClose={onClose}>
       <Box
@@ -43,8 +60,10 @@ export const NewCreatureModal = ({
               type="number"
               required
               fullWidth
-              onChange={({ target }) => console.log(target)}
-              value={''}
+              onChange={({ target }) =>
+                setNewCreature({ ...newCreature, initative: target.value })
+              }
+              value={newCreature.initative}
               variant="outlined"
               placeholder="Init"
             />
@@ -53,8 +72,10 @@ export const NewCreatureModal = ({
               size="small"
               type="number"
               fullWidth
-              onChange={({ target }) => console.log(target)}
-              value={''}
+              onChange={({ target }) =>
+                setNewCreature({ ...newCreature, hp: target.value })
+              }
+              value={newCreature.hp}
               variant="outlined"
               placeholder="HP"
             />
@@ -65,8 +86,10 @@ export const NewCreatureModal = ({
             type="text"
             required
             fullWidth
-            onChange={({ target }) => console.log(target)}
-            value={''}
+            onChange={({ target }) =>
+              setNewCreature({ ...newCreature, name: target.value })
+            }
+            value={newCreature.name}
             variant="outlined"
             placeholder="Name"
           />
@@ -86,7 +109,7 @@ export const NewCreatureModal = ({
               fullWidth
               color="success"
               onClick={() => {
-                onAdd();
+                onAdd(newCreature);
                 onClose();
               }}
             >
