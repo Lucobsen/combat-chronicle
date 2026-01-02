@@ -57,7 +57,7 @@ export const updateEncounterName = mutation({
       throw new Error('Prevented illegal update');
     }
 
-    return await ctx.db.patch(args.id, {
+    return await ctx.db.patch('encounters', args.id, {
       name: args.name,
       updatedAt: Date.now(),
     });
@@ -82,7 +82,7 @@ export const updateEncounterTurn = mutation({
       throw new Error('Prevented illegal update');
     }
 
-    return await ctx.db.patch(id, {
+    return await ctx.db.patch('encounters', id, {
       round,
       activeCreatureId,
       updatedAt: Date.now(),
@@ -107,7 +107,7 @@ export const setActiveCreatureId = mutation({
       throw new Error('Prevented illegal update');
     }
 
-    return await ctx.db.patch(id, {
+    return await ctx.db.patch('encounters', id, {
       activeCreatureId,
       updatedAt: Date.now(),
     });
@@ -131,7 +131,7 @@ export const resetEncounter = mutation({
       throw new Error('Prevented illegal update');
     }
 
-    return await ctx.db.patch(id, {
+    return await ctx.db.patch('encounters', id, {
       activeCreatureId: '',
       round: 1,
       creatures,
@@ -158,7 +158,7 @@ export const startEncounter = mutation({
       throw new Error('Prevented illegal update');
     }
 
-    return await ctx.db.patch(id, {
+    return await ctx.db.patch('encounters', id, {
       activeCreatureId,
       round: 1,
       updatedAt: Date.now(),
@@ -184,7 +184,7 @@ export const addCreatures = mutation({
       throw new Error('Prevented illegal update');
     }
 
-    return await ctx.db.patch(id, {
+    return await ctx.db.patch('encounters', id, {
       creatures,
       updatedAt: Date.now(),
     });
@@ -205,6 +205,6 @@ export const deleteEncounter = mutation({
 
     if (identity.subject !== args.createdBy) return;
 
-    return await ctx.db.delete(args.id);
+    return await ctx.db.delete('encounters', args.id);
   },
 });
