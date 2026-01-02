@@ -19,7 +19,7 @@
     "@mui/icons-material": "^7.3.6",
     "@mui/material": "^7.3.6",
     "@tanstack/react-query": "^5.90.12",
-    "@tanstack/react-query-devtools": "^5.91.1",
+    "@tanstack/react-query-devtools": "^5.91.2",
     "@tanstack/react-router": "^1.143.11",
     "@tanstack/react-router-devtools": "^1.143.11",
     "@vercel/analytics": "^1.6.1",
