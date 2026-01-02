@@ -55,7 +55,7 @@ export const deleteParty = mutation({
 
     if (identity.subject !== args.createdBy) return;
 
-    return await ctx.db.delete(args.id);
+    return await ctx.db.delete('parties', args.id);
   },
 });
 
@@ -82,7 +82,7 @@ export const patchParty = mutation({
       throw new Error('Prevented illegal patch');
     }
 
-    return await ctx.db.patch(args.id, {
+    return await ctx.db.patch('parties', args.id, {
       name: args.name,
       heroes: args.heroes,
       updatedAt: Date.now(),
