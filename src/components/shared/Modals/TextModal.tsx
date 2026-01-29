@@ -18,7 +18,6 @@ export const TextModal = ({
   return (
     <Modal open={isOpen} onClose={onClose}>
       <Box
-        width="80%"
         p={2}
         borderRadius={2}
         sx={{
@@ -38,8 +37,19 @@ export const TextModal = ({
           {content}
         </Typography>
 
-        <Stack direction="row" alignItems="center" spacing={2}>
-          <Button variant="contained" fullWidth color="info" onClick={onClose}>
+        <Stack
+          direction="row"
+          alignItems="center"
+          spacing={2}
+          justifyContent="center"
+        >
+          <Button
+            variant="contained"
+            fullWidth
+            color="info"
+            onClick={onClose}
+            sx={{ minWidth: '120px' }}
+          >
             No
           </Button>
           <Button
@@ -47,6 +57,7 @@ export const TextModal = ({
             fullWidth
             color="error"
             onClick={onConfirm}
+            sx={{ minWidth: '120px' }}
           >
             Yes
           </Button>

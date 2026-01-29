@@ -25,6 +25,7 @@ export const creature = v.object({
   isHidden: v.boolean(),
   conditions: v.array(v.string()),
   isEnemy: v.boolean(),
+  armorClass: v.optional(v.string()),
 });
 
 export type CreatureObject = Infer<typeof creature>;

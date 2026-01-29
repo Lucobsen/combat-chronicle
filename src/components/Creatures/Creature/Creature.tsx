@@ -13,7 +13,6 @@ import { useEffect, useRef, useState } from 'react';
 import type { CreatureObject } from '../../../../convex/schema';
 import { useDebounce } from '../../../utils/debouce';
 import { TextModal } from '../../shared/Modals/TextModal';
-import { Conditions } from '../Conditions/Conditions';
 
 interface CreatureObjectProps {
   creature: CreatureObject;
@@ -28,7 +27,7 @@ export const Creature = ({
   onDelete,
   hasCurrentTurn = false,
 }: CreatureObjectProps) => {
-  const { id, conditions, name, initative, isHidden, hp, isEnemy } = creature;
+  const { id, name, initative, isHidden, hp, isEnemy, armorClass } = creature;
 
   const listItemRef = useRef<HTMLLIElement>(null);
   const { palette } = useTheme();
@@ -39,25 +38,6 @@ export const Creature = ({
 
   const handleUpdate = (updatedCreature: CreatureObject) =>
     debouncedChangeHandler(updatedCreature);
-
-  const handleConditionChange = (condition: string) => {
-    const tempConditions = [...conditions];
-    const index = tempConditions.findIndex(
-      (currentCondition) => currentCondition === condition
-    );
-
-    const newConditions =
-      index >= 0
-        ? tempConditions.filter(
-            (currentCondition) => condition !== currentCondition
-          )
-        : [...tempConditions, condition];
-
-    onUpdate({
-      ...creature,
-      conditions: newConditions,
-    });
-  };
 
   useEffect(() => {
     if (hasCurrentTurn === true)
@@ -77,7 +57,6 @@ export const Creature = ({
       >
         <Box
           maxWidth="500px"
-          minHeight={60}
           width="100%"
           bgcolor={palette.background.default}
           border={`1px solid ${
@@ -106,17 +85,19 @@ export const Creature = ({
                 }
                 defaultValue={initative}
                 variant="standard"
+                label="Init"
                 placeholder="Init"
               />
             </Grid>
 
             <Grid size={{ xs: 0.5 }}></Grid>
 
-            <Grid size={{ xs: hp !== undefined ? 7 : 8.5 }}>
+            <Grid size={{ xs: hp !== undefined ? 5 : 6.5 }}>
               <TextField
                 size="small"
                 type="text"
                 fullWidth
+                label="Name"
                 onChange={({ target }) =>
                   handleUpdate({ ...creature, name: target.value })
                 }
@@ -135,6 +116,7 @@ export const Creature = ({
                     size="small"
                     type="number"
                     fullWidth
+                    label="HP"
                     onChange={({ target }) =>
                       handleUpdate({ ...creature, hp: target.value })
                     }
@@ -145,6 +127,23 @@ export const Creature = ({
                 </Grid>
               </>
             )}
+
+            <Grid size={{ xs: 0.5 }}></Grid>
+
+            <Grid size={{ xs: 1 }}>
+              <TextField
+                size="small"
+                type="number"
+                fullWidth
+                label="AC"
+                onChange={({ target }) =>
+                  handleUpdate({ ...creature, armorClass: target.value })
+                }
+                defaultValue={armorClass}
+                variant="standard"
+                placeholder="AC"
+              />
+            </Grid>
 
             <Grid size={{ xs: 1 }}>
               <IconButton
@@ -166,12 +165,6 @@ export const Creature = ({
               </IconButton>
             </Grid>
           </Grid>
-
-          <Conditions
-            currentConditions={conditions}
-            name={name}
-            onUpdate={(condition) => handleConditionChange(condition)}
-          />
         </Box>
       </ListItem>
 
