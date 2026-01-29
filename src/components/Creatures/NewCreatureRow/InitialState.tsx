@@ -30,6 +30,7 @@ export const InitialState = ({
     isHidden: false,
     createdBy: '',
     updatedAt: 0,
+    armorClass: '',
   };
 
   const [newCreature, setNewCreature] =
@@ -44,7 +45,7 @@ export const InitialState = ({
           type="number"
           label="Init"
           slotProps={{ inputLabel: { sx: { color: '#fff' } } }}
-          sx={{ width: '40%' }}
+          sx={{ width: '50%' }}
           onChange={({ target }) =>
             setNewCreature({ ...newCreature, initative: target.value })
           }
@@ -81,6 +82,20 @@ export const InitialState = ({
           value={newCreature.hp}
           variant="outlined"
           placeholder="HP"
+        />
+
+        <TextField
+          size="small"
+          type="number"
+          label="AC"
+          sx={{ width: '40%' }}
+          slotProps={{ inputLabel: { sx: { color: '#fff' } } }}
+          onChange={({ target }) =>
+            setNewCreature({ ...newCreature, armorClass: target.value })
+          }
+          value={newCreature.armorClass}
+          variant="outlined"
+          placeholder="AC"
         />
 
         <IconButton
