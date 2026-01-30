@@ -14,6 +14,7 @@ import { Link } from '@tanstack/react-router';
 import { useContext, useState } from 'react';
 import { ScreenSizeContext } from '../../../utils/screen-size-context';
 import { MenuDrawer } from '../../Drawers/MenuDrawer';
+import { LogoutButton } from '../Buttons/LogoutButton';
 
 export const Navbar = () => {
   const { palette } = useTheme();
@@ -67,7 +68,7 @@ export const Navbar = () => {
                 />
               </IconButton>
             ) : (
-              <Stack direction="row" spacing={2}>
+              <Stack direction="row" spacing={2} alignItems="center">
                 <Link
                   to="/"
                   style={{
@@ -86,6 +87,7 @@ export const Navbar = () => {
                 >
                   Parties
                 </Link>
+                <LogoutButton />
               </Stack>
             )}
           </Toolbar>
