@@ -23,7 +23,7 @@
     "@tanstack/react-router": "^1.158.1",
     "@tanstack/react-router-devtools": "^1.159.5",
     "@vercel/analytics": "^1.6.1",
-    "convex": "^1.31.6",
+    "convex": "^1.32.0",
     "date-fns": "^4.1.0",
     "notistack": "^3.0.2",
     "react": "^19.2.4",
