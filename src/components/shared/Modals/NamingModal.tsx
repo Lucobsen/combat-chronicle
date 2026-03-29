@@ -21,17 +21,17 @@ export const NamingModal = ({
 }: INamingModalProps) => {
   const [newNameValue, setNewNameValue] = useState('');
 
+  const handleOnCreate = () => {
+    if (newNameValue !== '') onCreate(newNameValue);
+    setNewNameValue('');
+    onClose();
+  };
+
   return (
-    <Modal
-      open={isOpen}
-      onClose={() => {
-        if (newNameValue !== '') onCreate(newNameValue);
-        setNewNameValue('');
-        onClose();
-      }}
-    >
+    <Modal open={isOpen} onClose={() => handleOnCreate()}>
       <Box
         width="80%"
+        maxWidth={600}
         p={2}
         borderRadius={2}
         bgcolor={({ palette }) => palette.background.default}
@@ -49,6 +49,10 @@ export const NamingModal = ({
             defaultValue={value}
             label={label}
             fullWidth
+            autoFocus
+            onKeyDown={({ key }) => {
+              if (key.toLowerCase() === 'enter') handleOnCreate();
+            }}
             slotProps={{ inputLabel: { sx: { color: '#fff' } } }}
             onChange={({ target }) => setNewNameValue(target.value)}
           />
@@ -56,7 +60,7 @@ export const NamingModal = ({
           <IconButton
             disabled={newNameValue === ''}
             color="success"
-            onClick={() => onCreate(newNameValue)}
+            onClick={() => handleOnCreate()}
           >
             <AddIcon />
           </IconButton>

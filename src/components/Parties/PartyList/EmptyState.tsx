@@ -10,6 +10,7 @@ export const EmptyState = ({ openModal }: IEmptyStateProps) => (
     left="50%"
     top="30%"
     justifyContent="center"
+    alignItems="center"
     width="60%"
     spacing={2}
     sx={{
@@ -27,7 +28,7 @@ export const EmptyState = ({ openModal }: IEmptyStateProps) => (
     <Button
       variant="contained"
       color="success"
-      sx={{ fontWeight: 'bold' }}
+      sx={{ fontWeight: 'bold', width: 'fit-content' }}
       onClick={openModal}
     >
       Add party

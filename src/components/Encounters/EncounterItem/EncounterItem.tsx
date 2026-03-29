@@ -14,7 +14,6 @@ import { differenceInHours, format } from 'date-fns';
 import { useState } from 'react';
 import type { Id } from '../../../../convex/_generated/dataModel';
 import type { EncounterObject } from '../../../../convex/schema';
-import { CombatContextProvider } from '../../../utils/combat-context-provider';
 import { NamingModal } from '../../shared/Modals/NamingModal';
 import { TextModal } from '../../shared/Modals/TextModal';
 
@@ -48,7 +47,7 @@ export const EncounterItem = ({
   const creatureCount = creatures.length;
 
   return (
-    <CombatContextProvider>
+    <>
       <Box
         width="80%"
         maxWidth="500px"
@@ -140,6 +139,6 @@ export const EncounterItem = ({
         }}
         content={`Do you wish to delete "${name}"?`}
       />
-    </CombatContextProvider>
+    </>
   );
 };

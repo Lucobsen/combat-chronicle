@@ -5,6 +5,7 @@ import type { CreatureObject } from '../../convex/schema';
 import { CreatureList } from '../components/Creatures/CreatureList/CreatureList';
 import { NavBar } from '../components/Creatures/CreatureNavBar/CreatureNavBar';
 import { NewCreatureRow } from '../components/Creatures/NewCreatureRow/NewCreatureRow';
+import { CombatContextProvider } from '../utils/combat-context-provider';
 
 const sortCreatures = (creatures: CreatureObject[]) =>
   creatures.sort(
@@ -177,7 +178,7 @@ const Creatures = () => {
     });
 
   return (
-    <>
+    <CombatContextProvider>
       <NavBar
         onReset={() =>
           resetEncounter({
@@ -206,7 +207,7 @@ const Creatures = () => {
         onAddMultipleCreatures={handleMultiAdd}
         inProgress={inProgress}
       />
-    </>
+    </CombatContextProvider>
   );
 };
 

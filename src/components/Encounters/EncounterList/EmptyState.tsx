@@ -12,6 +12,7 @@ export const EmptyState = ({ openModal }: IEmptyStateProps) => (
     justifyContent="center"
     width="60%"
     spacing={2}
+    alignItems="center"
     sx={{
       transform: 'translate(-50%, -50%)',
     }}
@@ -27,7 +28,7 @@ export const EmptyState = ({ openModal }: IEmptyStateProps) => (
     <Button
       variant="contained"
       color="success"
-      sx={{ fontWeight: 'bold' }}
+      sx={{ fontWeight: 'bold', width: 'fit-content' }}
       onClick={openModal}
     >
       Create new encounter

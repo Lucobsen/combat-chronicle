@@ -57,6 +57,7 @@ export const NewCreatureRow = ({
     >
       <Toolbar
         sx={{
+          justifyContent: 'center',
           p: ({ spacing }) => spacing(1.5, 1),
           backgroundColor: ({ palette }) => palette.background.default,
         }}
