@@ -27,7 +27,6 @@ export const Route = createRootRouteWithContext<Auth0ContextType>()({
     if (!context.isAuthenticated) {
       // Auth0 handles login redirects, so just trigger login
       context.login();
-      return;
     }
   },
 });
