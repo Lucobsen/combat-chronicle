@@ -27,6 +27,7 @@ export const EncounterList = () => {
   const handleOnCreate = async (newName: string) => {
     setIsAddModalOpen(false);
 
+    // TODO: fix navigation
     const res: Id<'encounters'> = await createEncounter({
       name: newName,
       creatures: [],
