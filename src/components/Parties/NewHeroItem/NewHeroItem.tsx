@@ -1,6 +1,6 @@
+import AddIcon from '@mui/icons-material/Add';
 import { IconButton, ListItem, Stack, TextField } from '@mui/material';
 import { useState } from 'react';
-import AddIcon from '@mui/icons-material/Add';
 
 interface INewHeroItemProps {
   onAdd: (newHeroName: string) => void;
@@ -11,7 +11,7 @@ export const NewHeroItem = ({ onAdd }: INewHeroItemProps) => {
 
   return (
     <ListItem disableGutters sx={{ width: '100%' }}>
-      <Stack direction="row" width="100%" spacing={1}>
+      <Stack direction="row" sx={{ width: '100%' }} spacing={1}>
         <IconButton
           size="small"
           color="success"

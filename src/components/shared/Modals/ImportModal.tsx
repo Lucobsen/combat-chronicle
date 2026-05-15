@@ -20,10 +20,10 @@ export const ImportModal = ({
   return (
     <Modal open={isOpen} onClose={onClose}>
       <Box
-        width="80%"
-        p={2}
-        borderRadius={2}
         sx={{
+          width: '80%',
+          p: 2,
+          borderRadius: 2,
           bgcolor: palette.background.default,
           position: 'absolute',
           left: '50%',
@@ -31,7 +31,7 @@ export const ImportModal = ({
           transform: 'translate(-50%, -50%)',
         }}
       >
-        <Stack alignItems="center" spacing={1}>
+        <Stack sx={{ alignItems: 'center' }} spacing={1}>
           <Typography variant="h6" color={palette.text.primary}>
             {title}
           </Typography>

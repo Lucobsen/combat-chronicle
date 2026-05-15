@@ -47,45 +47,45 @@ export const EmptyState = ({
   return (
     <>
       <Stack
-        position="absolute"
-        left="50%"
-        top="40%"
-        justifyContent="center"
-        width="80%"
         spacing={1}
         sx={{
+          position: 'absolute',
+          left: '50%',
+          top: '40%',
+          justifyContent: 'center',
+          width: '80%',
           transform: 'translate(-50%, -50%)',
         }}
       >
         <Typography
-          textAlign="center"
+          align="center"
           variant="h6"
-          alignSelf="center"
-          color="#fff"
+          sx={{ alignSelf: 'center', color: '#fff' }}
         >
           Add creatures below to populate your encounter.
         </Typography>
         <Typography
-          textAlign="center"
+          align="center"
           variant="h6"
-          alignSelf="center"
-          color="#fff"
+          sx={{ alignSelf: 'center', color: '#fff' }}
         >
           Creatures with HP will be tracked as ENEMIES!
         </Typography>
 
         {partiesWithHeros.length > 0 && (
-          <Stack alignItems="center">
+          <Stack sx={{ alignItems: 'center' }}>
             <Divider
               orientation="horizontal"
               color={palette.divider}
               sx={{ my: 2, width: '100%' }}
             />
             <Typography
-              textAlign="center"
+              align="center"
               variant="h6"
-              alignSelf="center"
-              color={palette.text.primary}
+              sx={{
+                alignSelf: 'center',
+                color: ({ palette }) => palette.text.primary,
+              }}
             >
               You can also
             </Typography>
@@ -101,10 +101,12 @@ export const EmptyState = ({
             </Button>
 
             <Typography
-              textAlign="center"
+              align="center"
               variant="h6"
-              alignSelf="center"
-              color={palette.text.primary}
+              sx={{
+                alignSelf: 'center',
+                color: ({ palette }) => palette.text.primary,
+              }}
             >
               a party to quickly populate your encounter.
             </Typography>

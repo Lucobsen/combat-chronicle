@@ -14,7 +14,11 @@ export const ActiveState = ({ changeTurn, onAdd }: IActiveStateProps) => {
 
   return (
     <>
-      <Stack direction="row" alignItems="center" spacing={2} width="100%">
+      <Stack
+        direction="row"
+        sx={{ alignItems: 'center', width: '100%' }}
+        spacing={2}
+      >
         <Button
           variant="contained"
           color="info"

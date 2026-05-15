@@ -41,10 +41,9 @@ export const Navbar = () => {
             <Stack
               spacing={1}
               direction="row"
-              alignItems="center"
-              overflow="hidden"
+              sx={{ alignItems: 'center', overflow: 'hidden' }}
             >
-              <Typography fontWeight="bold" variant="h6">
+              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
                 Combat Chronicle
               </Typography>
               <Chip
@@ -68,7 +67,7 @@ export const Navbar = () => {
                 />
               </IconButton>
             ) : (
-              <Stack direction="row" spacing={2} alignItems="center">
+              <Stack direction="row" spacing={2} sx={{ alignItems: 'center' }}>
                 <Link
                   to="/"
                   style={{

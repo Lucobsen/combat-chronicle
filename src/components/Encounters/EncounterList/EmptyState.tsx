@@ -6,22 +6,21 @@ interface IEmptyStateProps {
 
 export const EmptyState = ({ openModal }: IEmptyStateProps) => (
   <Stack
-    position="absolute"
-    left="50%"
-    top="30%"
-    justifyContent="center"
-    width="60%"
     spacing={2}
-    alignItems="center"
     sx={{
+      alignItems: 'center',
+      position: 'absolute',
+      left: '50%',
+      top: '30%',
+      justifyContent: 'center',
+      width: '60%',
       transform: 'translate(-50%, -50%)',
     }}
   >
     <Typography
       variant="h6"
-      alignSelf="center"
-      textAlign="center"
-      color="white"
+      sx={{ alignSelf: 'center', color: '#fff' }}
+      align="center"
     >
       Nat 1, no encounters found!
     </Typography>

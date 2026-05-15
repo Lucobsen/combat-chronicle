@@ -4,8 +4,10 @@ import { PartyList } from './PartyList/PartyList';
 
 const fallbackComponent = (
   <Container sx={{ px: 2, pt: 10, pb: 8 }}>
-    <Box display="flex" alignItems="center" justifyContent="center">
-      <Typography variant="h4" color="error" textAlign="center">
+    <Box
+      sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+    >
+      <Typography variant="h4" sx={{ color: 'error' }} align="center">
         Something has gone wrong!
       </Typography>
     </Box>

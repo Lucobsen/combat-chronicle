@@ -46,18 +46,19 @@ export const NavBar = ({
             <Stack
               spacing={1}
               direction="row"
-              alignItems="center"
-              overflow="hidden"
+              sx={{ alignItems: 'center', overflow: 'hidden' }}
             >
               <Link href="/" color={palette.common.white} underline="none">
                 <ArrowBackIosIcon fontSize="small" />
               </Link>
               <Typography
                 variant="h6"
-                whiteSpace="nowrap"
-                textOverflow="ellipsis"
-                overflow="hidden"
-                fontWeight="bold"
+                sx={{
+                  whiteSpace: 'nowrap',
+                  textOverflow: 'ellipsis',
+                  overflow: 'hidden',
+                  fontWeight: 'bold',
+                }}
               >
                 {encounterName}
               </Typography>

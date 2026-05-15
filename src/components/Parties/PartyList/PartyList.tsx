@@ -38,7 +38,7 @@ export const PartyList = () => {
     <>
       <Container sx={{ px: 2, pt: 9, pb: 8 }}>
         {isLoading ? (
-          <Stack alignItems="center" spacing={2}>
+          <Stack sx={{ alignItems: 'center' }} spacing={2}>
             <Skeleton
               width="100%"
               height="52px"
@@ -72,7 +72,7 @@ export const PartyList = () => {
           </Stack>
         ) : parties.length > 0 ? (
           <>
-            <Stack alignItems="center" spacing={2}>
+            <Stack sx={{ alignItems: 'center' }} spacing={2}>
               {parties.map(({ _id, name, heroes, createdBy }) => (
                 <PartyItem
                   name={name}

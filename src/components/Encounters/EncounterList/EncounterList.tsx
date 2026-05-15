@@ -46,7 +46,7 @@ export const EncounterList = () => {
     <>
       <Container sx={{ px: 4, pt: 9, pb: 8 }}>
         {isLoading ? (
-          <Stack alignItems="center" spacing={2}>
+          <Stack sx={{ alignItems: 'center' }} spacing={2}>
             <Skeleton
               width="100%"
               height="86px"
@@ -70,7 +70,7 @@ export const EncounterList = () => {
           </Stack>
         ) : encounters.length > 0 ? (
           <>
-            <Stack alignItems="center" spacing={2}>
+            <Stack sx={{ alignItems: 'center' }} spacing={2}>
               {encounters.map((encounter) => (
                 <EncounterItem
                   id={encounter._id}
