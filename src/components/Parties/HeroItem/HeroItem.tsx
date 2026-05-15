@@ -1,4 +1,4 @@
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
 import { IconButton, ListItem, Stack, TextField } from '@mui/material';
 import { useDebounce } from '../../../utils/debouce';
 
@@ -19,9 +19,9 @@ export const HeroItem = ({ onDelete, onUpdate, name }: IHeroItemProps) => {
 
   return (
     <ListItem disableGutters sx={{ width: '100%' }}>
-      <Stack direction="row" width="100%" spacing={1}>
+      <Stack direction="row" sx={{ width: '100%' }} spacing={1}>
         <IconButton size="small" onClick={onDelete} color="error">
-          <DeleteOutlineIcon />
+          <DeleteOutlineRoundedIcon />
         </IconButton>
         <TextField
           size="small"

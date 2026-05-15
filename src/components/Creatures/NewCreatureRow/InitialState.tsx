@@ -39,7 +39,7 @@ export const InitialState = ({
 
   return (
     <Stack spacing={1}>
-      <Stack direction="row" alignItems="center" spacing={1}>
+      <Stack direction="row" sx={{ alignItems: 'center' }} spacing={1}>
         <TextField
           size="small"
           type="number"
@@ -116,7 +116,7 @@ export const InitialState = ({
         </IconButton>
       </Stack>
 
-      <Stack direction="row" alignItems="center" spacing={1}>
+      <Stack direction="row" sx={{ alignItems: 'center' }} spacing={1}>
         <TextField
           select
           size="small"

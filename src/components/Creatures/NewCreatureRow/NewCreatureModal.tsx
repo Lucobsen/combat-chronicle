@@ -38,10 +38,10 @@ export const NewCreatureModal = ({
   return (
     <Modal open={isOpen} onClose={onClose}>
       <Box
-        width="80%"
-        p={2}
-        borderRadius={2}
         sx={{
+          width: '80%',
+          p: 2,
+          borderRadius: 2,
           bgcolor: ({ palette }) => palette.background.default,
           position: 'absolute',
           left: '50%',
@@ -49,12 +49,12 @@ export const NewCreatureModal = ({
           transform: 'translate(-50%, -50%)',
         }}
       >
-        <Typography textAlign="center" variant="h6" mb={2} color="white">
+        <Typography align="center" variant="h6" sx={{ color: '#fff', mb: 2 }}>
           Enter New Creature Details
         </Typography>
 
-        <Stack alignItems="center" spacing={2}>
-          <Stack direction="row" alignItems="center" spacing={1}>
+        <Stack sx={{ alignItems: 'center' }} spacing={2}>
+          <Stack direction="row" sx={{ alignItems: 'center' }} spacing={1}>
             <TextField
               size="small"
               type="number"
@@ -94,7 +94,11 @@ export const NewCreatureModal = ({
             placeholder="Name"
           />
 
-          <Stack direction="row" alignItems="center" spacing={1} width="100%">
+          <Stack
+            direction="row"
+            sx={{ alignItems: 'center', width: '100%' }}
+            spacing={1}
+          >
             <Button
               variant="contained"
               fullWidth

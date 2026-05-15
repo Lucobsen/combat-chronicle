@@ -1,4 +1,4 @@
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import {
   Box,
@@ -49,16 +49,20 @@ export const EncounterItem = ({
   return (
     <>
       <Box
-        width="80%"
-        maxWidth="500px"
-        bgcolor={palette.background.default}
-        border={`1px solid ${palette.common.white}`}
-        borderRadius={2}
-        p={1}
-        sx={{ width: '100%' }}
+        sx={{
+          width: '100%',
+          maxWidth: '500px',
+          bgcolor: ({ palette }) => palette.background.default,
+          border: `1px solid ${palette.common.white}`,
+          borderRadius: 2,
+          p: 1,
+        }}
       >
-        <Grid container alignItems="center">
-          <Grid size={{ xs: 10.5 }} overflow="hidden " textOverflow="ellipsis">
+        <Grid container sx={{ alignItems: 'center' }}>
+          <Grid
+            size={{ xs: 10.5 }}
+            sx={{ overflow: 'hidden', textOverflow: 'ellipsis' }}
+          >
             <Link
               style={{ textDecoration: 'none' }}
               to="/$encounterId"
@@ -69,7 +73,7 @@ export const EncounterItem = ({
               </Typography>
             </Link>
             <Stack direction="row" spacing={1}>
-              <Typography fontSize="small" color="white">
+              <Typography sx={{ fontSize: 'small', color: '#fff' }}>
                 Updated: {getTime(updatedAt)}
               </Typography>
 
@@ -79,7 +83,7 @@ export const EncounterItem = ({
                 color={palette.common.white}
               />
 
-              <Typography fontSize="small" color="white">
+              <Typography sx={{ fontSize: 'small', color: '#fff' }}>
                 {`${creatureCount === 0 ? 'No' : creatureCount} Creatures`}
               </Typography>
 
@@ -90,7 +94,12 @@ export const EncounterItem = ({
                     flexItem
                     color={palette.common.white}
                   />
-                  <Typography fontSize="small" color={palette.success.main}>
+                  <Typography
+                    sx={{
+                      fontSize: 'small',
+                      color: ({ palette }) => palette.success.main,
+                    }}
+                  >
                     In Progress
                   </Typography>
                 </>
@@ -112,7 +121,7 @@ export const EncounterItem = ({
               color="error"
               size="small"
             >
-              <DeleteOutlineIcon />
+              <DeleteOutlineRoundedIcon />
             </IconButton>
           </Grid>
         </Grid>

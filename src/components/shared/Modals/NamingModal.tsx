@@ -30,16 +30,16 @@ export const NamingModal = ({
   return (
     <Modal open={isOpen} onClose={() => handleOnCreate()}>
       <Box
-        width="80%"
-        maxWidth={600}
-        p={2}
-        borderRadius={2}
-        bgcolor={({ palette }) => palette.background.default}
-        position="absolute"
-        left="50%"
-        top="50%"
         sx={{
+          p: 2,
+          borderRadius: 2,
+          bgcolor: ({ palette }) => palette.background.default,
           transform: 'translate(-50%, -50%)',
+          width: '80%',
+          maxWidth: 600,
+          position: 'absolute',
+          left: '50%',
+          top: '50%',
         }}
       >
         <Stack direction="row" spacing={1}>

@@ -1,4 +1,4 @@
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import {
@@ -56,23 +56,23 @@ export const Creature = ({
         sx={{ pb: 2, opacity: isHidden ? 0.2 : 1, justifyContent: 'center' }}
       >
         <Box
-          maxWidth="500px"
-          width="100%"
-          bgcolor={palette.background.default}
-          border={`1px solid ${
-            palette.mode === 'light'
-              ? palette.common.black
-              : palette.common.white
-          }`}
-          borderRadius={2}
-          p={1}
-          boxShadow={
-            hasCurrentTurn
+          sx={{
+            maxWidth: '500px',
+            width: '100%',
+            bgcolor: ({ palette }) => palette.background.default,
+            border: `1px solid ${
+              palette.mode === 'light'
+                ? palette.common.black
+                : palette.common.white
+            }`,
+            borderRadius: 2,
+            p: 1,
+            boxShadow: hasCurrentTurn
               ? `0 0 8px 2px ${
                   isEnemy ? palette.error.main : palette.primary.main
                 }`
-              : 'none'
-          }
+              : 'none',
+          }}
         >
           <Grid container direction="row">
             <Grid size={{ xs: 1 }}>
@@ -161,7 +161,7 @@ export const Creature = ({
                 sx={{ color: palette.error.main }}
                 onClick={() => setIsDeleteModalOpen(true)}
               >
-                <DeleteOutlineIcon />
+                <DeleteOutlineRoundedIcon />
               </IconButton>
             </Grid>
           </Grid>

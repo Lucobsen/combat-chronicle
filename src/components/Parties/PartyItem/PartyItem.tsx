@@ -1,4 +1,4 @@
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import {
@@ -41,14 +41,16 @@ export const PartyItem = ({
 
   return (
     <Box
-      maxWidth="500px"
-      width="100%"
-      border={`1px solid ${palette.common.white}`}
-      bgcolor={palette.background.default}
-      borderRadius={2}
-      p={1}
+      sx={{
+        maxWidth: '500px',
+        width: '100%',
+        border: `1px solid ${palette.common.white}`,
+        bgcolor: ({ palette }) => palette.background.default,
+        borderRadius: 2,
+        p: 1,
+      }}
     >
-      <Stack direction="row" spacing={1} alignItems="center">
+      <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
         <IconButton
           size="small"
           onClick={() => setIsHeroListOpen(!isHeroListOpen)}
@@ -72,7 +74,7 @@ export const PartyItem = ({
           placeholder="Update party name"
         />
         <IconButton size="small" onClick={onDeleteParty} color="error">
-          <DeleteOutlineIcon />
+          <DeleteOutlineRoundedIcon />
         </IconButton>
       </Stack>
 
